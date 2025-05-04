@@ -104,6 +104,7 @@ public:
             }
         }
         free(thr);
+        free(epoch);
     }
 
     inline T *init_object(T *obj, const int mytid)

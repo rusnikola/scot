@@ -6,7 +6,7 @@ output_dir = "../Data/tree_charts"
 os.makedirs(output_dir, exist_ok=True)
 
 # Labels and styles (same as in list memory chart)
-labels = ["NMTree-EBR", "NMTree-HP", "NMTree-IBR"]
+labels = ["NMTree-EBR", "NMTree-HP", "NMTree-IBR", "NMTree-HE"]
 line_styles = ['-', '--', '-.', ':']
 markers = ['o', 's', 'D', '^', 'v', 'p', '*']
 colors = ['m', 'c', 'blue', 'red', 'green', 'purple', 'orange']

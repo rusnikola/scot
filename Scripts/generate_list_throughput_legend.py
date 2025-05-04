@@ -9,10 +9,12 @@ labels = [
     "HMList-NR", "HList-NR",
     "HMList-EBR", "HList-EBR",
     "HMList-HP", "HList-HP (New)",
-    "HMList-IBR", "HList-IBR (New)"
+    "HMList-IBR", "HList-IBR (New)",
+    "HMList-HE", "HList-HE (New)",
+    "HMList-HLN", "HList-HLN (New)"
 ]
-hatches = ['-', '\\', '/', '*']
-colors = ['gold', 'g', 'm', 'c', 'blue', 'red', 'green', 'purple']
+hatches = ['-', '\\', '/', '*', '+', 'x', 'O', '.']
+colors = ['gold', 'teal', 'm', 'c', 'blue', 'red', 'green', 'purple', 'orange', 'brown', 'pink', 'olive']
 
 handles = []
 for i, label in enumerate(labels):

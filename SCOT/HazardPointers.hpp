@@ -40,7 +40,7 @@ template<typename T>
 class HazardPointers {
 
 private:
-    static const int      HP_MAX_THREADS = 256;
+    static const int      HP_MAX_THREADS = 384;
     static const int      HP_MAX_HPS = 5;
     static const int      CLPAD = 128/sizeof(std::atomic<T*>);
     static const int      HP_THRESHOLD_R = 128;

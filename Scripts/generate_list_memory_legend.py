@@ -7,12 +7,13 @@ os.makedirs(output_dir, exist_ok=True)
 labels = [
     "HMList-EBR", "HList-EBR",
     "HMList-HP", "HList-HP (New)",
-    "HMList-IBR", "HList-IBR (New)"
+    "HMList-IBR", "HList-IBR (New)",
+    "HMList-HE", "HList-HE (New)"
 ]
 
 line_styles = ['-', '--', '-.', ':']
 markers = ['o', 's', 'D', '^', 'v', 'p', '*']
-colors = ['m', 'c', 'blue', 'red', 'green', 'purple']
+colors = ['m', 'c', 'blue', 'red', 'green', 'purple', 'orange', 'brown', 'pink', 'olive']
 
 fig, ax = plt.subplots(figsize=(16, 6))
 ax.axis('off')

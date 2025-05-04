@@ -9,7 +9,7 @@ make
 
 ## Usage Example
 
-Test linked list (Harris-Michael, Harris' linked lists). In the example below, 10 is 10 seconds, 16 is the key range and number of elements, 16 is the key range, 5 is the number of iterations, 50 is the percentage of reads, 25 is the percentage of inserts, 25 is the percentage of deletes, IBR is thereclamation scheme (can also be NR, EBR, HP).
+Test linked list (Harris-Michael, Harris' linked lists). In the example below, 10 is 10 seconds, 16 is the key range and number of elements, 16 is the key range, 5 is the number of iterations, 50 is the percentage of reads, 25 is the percentage of inserts, 25 is the percentage of deletes, IBR is thereclamation scheme (can also be NR, EBR, HP, HE, HYALINE).
 
 ```
 ./SCOT/bench list 10 16 5 50 25 25 IBR

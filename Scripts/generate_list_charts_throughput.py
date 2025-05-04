@@ -8,8 +8,8 @@ import cairosvg
 
 BASE_DIR = '../Data/list_output_results'
 CHART_DIR = '../Data/list_charts'
-HATCHES = ['-', '\\', '/', '*']
-COLORS = ['gold', 'g', 'm', 'c', 'blue', 'red', 'green', 'purple']
+HATCHES = ['-', '\\', '/', '*', '+', 'x', 'O', '.']
+COLORS = ['gold', 'teal', 'm', 'c', 'blue', 'red', 'green', 'purple', 'orange', 'brown', 'pink', 'olive']
 SAVE_SUFFIX = '_throughput_plot'
 
 column_name_replacements = {
@@ -20,13 +20,18 @@ column_name_replacements = {
     "HarrisMichaelLinkedListHP": "HMList-HP",
     "HarrisLinkedListHP": "HList-HP (New)",
     "HarrisMichaelLinkedListIBR": "HMList-IBR",
-    "HarrisLinkedListIBR": "HList-IBR (New)"
+    "HarrisLinkedListIBR": "HList-IBR (New)",
+    "HarrisMichaelLinkedListHE": "HMList-HE",
+    "HarrisLinkedListHE": "HList-HE (New)",
+    "HarrisMichaelLinkedListHYALINE": "HMList-HLN",
+    "HarrisLinkedListHYALINE": "HList-HLN (New)"
 }
 
 def benchmark_sort_key(label):
     suffix = label.split('-')[-1].replace(" (New)", "")
     prefix = 0 if label.startswith("HMList") else 1
-    return ['NR', 'EBR', 'HP', 'IBR'].index(suffix) * 2 + prefix
+    order = ['NR', 'EBR', 'HP', 'IBR', 'HE', 'HLN']
+    return order.index(suffix) * 2 + prefix
 
 def extract_table(filepath):
     with open(filepath, 'r') as f:

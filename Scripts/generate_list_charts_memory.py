@@ -10,7 +10,7 @@ CHART_DIR = '../Data/list_charts'
 
 LINE_STYLES = ['-', '--', '-.', ':']
 MARKERS = ['o', 's', 'D', '^', 'v', 'p', '*']
-COLORS = ['m', 'c', 'blue', 'red', 'green', 'purple', 'orange']
+COLORS = ['m', 'c', 'blue', 'red', 'green', 'purple', 'orange', 'brown', 'pink', 'olive']
 
 column_replacements = {
     "HarrisMichaelLinkedListEBR_Memory_Usage": "HMList-EBR",
@@ -18,7 +18,9 @@ column_replacements = {
     "HarrisMichaelLinkedListHP_Memory_Usage": "HMList-HP",
     "HarrisLinkedListHP_Memory_Usage": "HList-HP (New)",
     "HarrisMichaelLinkedListIBR_Memory_Usage": "HMList-IBR",
-    "HarrisLinkedListIBR_Memory_Usage": "HList-IBR (New)"
+    "HarrisLinkedListIBR_Memory_Usage": "HList-IBR (New)",
+    "HarrisMichaelLinkedListHE_Memory_Usage": "HMList-HE",
+    "HarrisLinkedListHE_Memory_Usage": "HList-HE (New)"
 }
 
 def extract_list_memory_data(files, path):
@@ -42,7 +44,7 @@ def extract_list_memory_data(files, path):
             continue
 
         header = [h.strip() for h in lines[start].split(',')]
-        if "NR" in header[1]:
+        if any(x in header[1] for x in ["NR", "HYALINE"]):
             continue  # skip NR
 
         for line in lines[start+1:]:
@@ -79,7 +81,9 @@ def plot_memory_chart(thread_vals, data_map, output_dir, filename_prefix):
     ax.set_xlabel('Threads', fontsize=36, fontweight='bold', labelpad=5)
     ax.set_ylabel('Not-Yet-Reclaimed Objects', fontsize=36, fontweight='bold', labelpad=25)
     ax.set_xticks(thread_vals)
-    ax.set_xticklabels(thread_vals, fontsize=40, fontweight='bold')
+    custom_labels = [str(t) if t != 16 else '' for t in thread_vals]  # Hide label for 16
+    ax.set_xticklabels(custom_labels, fontsize=40, fontweight='bold')
+    #ax.set_xticklabels(thread_vals, fontsize=40, fontweight='bold')
     ax.ticklabel_format(axis='y', style='sci', scilimits=(0, 0), useMathText=True)
     ax.yaxis.offsetText.set_fontsize(40)
     ax.yaxis.offsetText.set_fontweight('bold')

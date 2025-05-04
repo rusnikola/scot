@@ -39,16 +39,22 @@
 #include <random>
 #include "HarrisLinkedListNR.hpp"
 #include "HarrisLinkedListHP.hpp"
+#include "HarrisLinkedListHE.hpp"
 #include "HarrisLinkedListEBR.hpp"
 #include "HarrisLinkedListIBR.hpp"
+#include "HarrisLinkedListHyaline.hpp"
 #include "HarrisMichaelLinkedListNR.hpp"
 #include "HarrisMichaelLinkedListHP.hpp"
+#include "HarrisMichaelLinkedListHE.hpp"
 #include "HarrisMichaelLinkedListEBR.hpp"
 #include "HarrisMichaelLinkedListIBR.hpp"
+#include "HarrisMichaelLinkedListHyaline.hpp"
 #include "NatarajanMittalTreeNR.hpp"
 #include "NatarajanMittalTreeHP.hpp"
+#include "NatarajanMittalTreeHE.hpp"
 #include "NatarajanMittalTreeEBR.hpp"
 #include "NatarajanMittalTreeIBR.hpp"
+#include "NatarajanMittalTreeHyaline.hpp"
 
 using namespace std;
 using namespace chrono;
@@ -248,9 +254,9 @@ public:
         if (userThreadCount > 0) {
             threadList = { userThreadCount };
         } else {
-            threadList = { 1, 16, 32, 64, 128, 256 };
+            threadList = { 1, 16, 32, 64, 128, 256, 384 };
         }
-        //threadList = { 2, 4 }; //for laptop
+        //threadList = { 2, 4, 6, 8 }; //for laptop
         const int numRuns = numberOfRuns;
         const seconds testLength = seconds(testLengthSeconds);
         vector<int> elemsList;
@@ -264,9 +270,13 @@ public:
             const int HLEBR = 1;
             const int MHLHP = 0;
             const int HLHP = 1;
+            const int MHLHE = 0;
+            const int HLHE = 1;
             const int MHLIBR = 0;
             const int HLIBR = 1;
-            
+            const int MHLHYALINE = 0;
+            const int HLHYALINE = 1;
+
             for (int ithread = 0; ithread < threadList.size(); ithread++) {
                         auto nThreads = threadList[ithread];
                         BenchmarkLists bench(nThreads);
@@ -298,14 +308,30 @@ public:
                             auto result8 = bench.benchmark<HarrisLinkedListIBR<UserData, 1>, 1>(testLength, numRuns, numElements, isList, readPercent, insertPercent, deletePercent, reclamation);
                             ops[HLIBR][ithread] = result8.first;
                             mem[HLIBR][ithread] = result8.second;
+                        } else if(reclamation == "HE"){
+                            auto result9 = bench.benchmark<HarrisMichaelLinkedListHE<UserData, 1>, 1>(testLength, numRuns, numElements, isList, readPercent, insertPercent, deletePercent, reclamation);
+                            ops[MHLHE][ithread] = result9.first;
+                            mem[MHLHE][ithread] = result9.second;
+                            auto result10 = bench.benchmark<HarrisLinkedListHE<UserData, 1>, 1>(testLength, numRuns, numElements, isList, readPercent, insertPercent, deletePercent, reclamation);
+                            ops[HLHE][ithread] = result10.first;
+                            mem[HLHE][ithread] = result10.second;
+                        } else if(reclamation == "HYALINE"){
+                            auto result11 = bench.benchmark<HarrisMichaelLinkedListHyaline<UserData, 1>, 1>(testLength, numRuns, numElements, isList, readPercent, insertPercent, deletePercent, reclamation);
+                            ops[MHLHYALINE][ithread] = result11.first;
+                            mem[MHLHYALINE][ithread] = result11.second;
+                            auto result12 = bench.benchmark<HarrisLinkedListHyaline<UserData, 1>, 1>(testLength, numRuns, numElements, isList, readPercent, insertPercent, deletePercent, reclamation);
+                            ops[HLHYALINE][ithread] = result12.first;
+                            mem[HLHYALINE][ithread] = result12.second;
                         }
                     }
         } else {
             const int NTNONE = 0;
             const int NTEBR = 0;
             const int NTHP = 0;
+            const int NTHE = 0;
             const int NTIBR = 0;
-            
+            const int NTHYALINE = 0;
+
             for (int ithread = 0; ithread < threadList.size(); ithread++) {
                 auto nThreads = threadList[ithread];
                 BenchmarkLists bench(nThreads);
@@ -326,6 +352,14 @@ public:
                     auto result4 = bench.benchmark<NatarajanMittalTreeIBR<UserData, 1>, 1>(testLength, numRuns, numElements, isList, readPercent, insertPercent, deletePercent, reclamation);
                     ops[NTIBR][ithread] = result4.first;
                     mem[NTIBR][ithread] = result4.second;
+                } else if(reclamation == "HE"){
+                    auto result5 = bench.benchmark<NatarajanMittalTreeHE<UserData, 1>, 1>(testLength, numRuns, numElements, isList, readPercent, insertPercent, deletePercent, reclamation);
+                    ops[NTHE][ithread] = result5.first;
+                    mem[NTHE][ithread] = result5.second;
+                } else if(reclamation == "HYALINE"){
+                    auto result6 = bench.benchmark<NatarajanMittalTreeHyaline<UserData, 1>, 1>(testLength, numRuns, numElements, isList, readPercent, insertPercent, deletePercent, reclamation);
+                    ops[NTHYALINE][ithread] = result6.first;
+                    mem[NTHYALINE][ithread] = result6.second;
                 }
             }
         }
@@ -344,6 +378,10 @@ public:
                 cout << "Threads, HarrisMichaelLinkedListHP, HarrisLinkedListHP, HarrisMichaelLinkedListHP_Memory_Usage, HarrisLinkedListHP_Memory_Usage\n";
             } else if(reclamation == "IBR"){
                 cout << "Threads, HarrisMichaelLinkedListIBR, HarrisLinkedListIBR, HarrisMichaelLinkedListIBR_Memory_Usage, HarrisLinkedListIBR_Memory_Usage\n";
+            } else if(reclamation == "HE"){
+                cout << "Threads, HarrisMichaelLinkedListHE, HarrisLinkedListHE, HarrisMichaelLinkedListHE_Memory_Usage, HarrisLinkedListHE_Memory_Usage\n";
+            } else if(reclamation == "HYALINE"){
+                cout << "Threads, HarrisMichaelLinkedListHYALINE, HarrisLinkedListHYALINE, HarrisMichaelLinkedListHYALINE_Memory_Usage, HarrisLinkedListHYALINE_Memory_Usage\n";
             }
         } else {
             classSize = 1;
@@ -355,6 +393,10 @@ public:
                 cout << "Threads, NatarajanMittalTreeHP, NatarajanMittalTreeHP_Memory_Usage\n";
             } else if(reclamation == "IBR"){
                 cout << "Threads, NatarajanMittalTreeIBR, NatarajanMittalTreeIBR_Memory_Usage\n";
+            } else if(reclamation == "HE"){
+                cout << "Threads, NatarajanMittalTreeHE, NatarajanMittalTreeHE_Memory_Usage\n";
+            } else if(reclamation == "HYALINE"){
+                cout << "Threads, NatarajanMittalTreeHYALINE, NatarajanMittalTreeHYALINE_Memory_Usage\n";
             }
         }
         for (int ithread = 0; ithread < threadList.size(); ithread++) {

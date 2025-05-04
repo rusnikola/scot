@@ -5,15 +5,15 @@ import os
 output_dir = "../Data/tree_charts"
 os.makedirs(output_dir, exist_ok=True)
 
-labels = ["NMTree-NR", "NMTree-EBR", "NMTree-HP", "NMTree-IBR"]
-colors = ['gold', 'g', 'm', 'c']
+labels = ["NMTree-NR", "NMTree-EBR", "NMTree-HP", "NMTree-IBR", "NMTree-HE", "NMTree-HLN"]
+colors = ['gold', 'g', 'm', 'c', 'blue', 'red', 'green', 'purple']
 hatches = ['-', '\\', '/', '*']
 
 handles = []
 for i, label in enumerate(labels):
     patch = mpatches.Patch(
         facecolor=colors[i],
-        hatch=hatches[i],
+        hatch=hatches[i % len(hatches)],
         edgecolor='black',
         label=label
     )

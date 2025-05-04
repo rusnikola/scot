@@ -16,12 +16,14 @@ column_name_replacements = {
     "NatarajanMittalTreeNR": "NMTree-NR",
     "NatarajanMittalTreeEBR": "NMTree-EBR",
     "NatarajanMittalTreeHP": "NMTree-HP",
-    "NatarajanMittalTreeIBR": "NMTree-IBR"
+    "NatarajanMittalTreeIBR": "NMTree-IBR",
+    "NatarajanMittalTreeHE": "NMTree-HE",
+    "NatarajanMittalTreeHYALINE": "NMTree-HLN"
 }
 
 def benchmark_sort_key(label):
     suffix = label.split('-')[-1]
-    return ['NR', 'EBR', 'HP', 'IBR'].index(suffix)
+    return ['NR', 'EBR', 'HP', 'IBR', 'HE', 'HLN'].index(suffix)
 
 def extract_table(filepath):
     with open(filepath, 'r') as f:

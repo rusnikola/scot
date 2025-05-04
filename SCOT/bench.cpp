@@ -24,7 +24,7 @@ int main(int argc, char* argv[]) {
                   << "  <read_percent>           : Percentage of read operations (e.g., 80 or 80%)\n"
                   << "  <insert_percent>         : Percentage of insert operations (e.g., 10 or 10%)\n"
                   << "  <delete_percent>         : Percentage of delete operations (e.g., 10 or 10%)\n"
-                  << "  <reclamation>            : Reclamation scheme: NR | EBR | HP | IBR\n"
+                  << "  <reclamation>            : Reclamation scheme: HP | EBR | NR | IBR | HE | HYALINE\n"
                   << "  [num_threads]            : (Optional) Number of threads to run (e.g., 64)\n\n"
                   << "Note: Sum of read, insert, and delete percentages must not exceed 100.\n"
                   << std::endl;
@@ -59,8 +59,8 @@ int main(int argc, char* argv[]) {
     }
 
     std::string reclamation = argv[8];
-    if (reclamation != "HP" && reclamation != "EBR" && reclamation != "NR" && reclamation != "IBR") {
-        std::cerr << "Invalid reclamation strategy. Use: HP | EBR | NR | IBR\n";
+    if (reclamation != "HP" && reclamation != "EBR" && reclamation != "NR" && reclamation != "IBR" && reclamation != "HE" && reclamation != "HYALINE") {
+        std::cerr << "Invalid reclamation strategy. Use: HP | EBR | NR | IBR | HE | HYALINE\n";
         return 1;
     }
 
