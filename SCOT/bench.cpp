@@ -15,9 +15,9 @@
 
 int main(int argc, char* argv[]) {
     if (argc < 9) {
-        std::cerr << "Usage: ./bench <list|tree> <test_length_seconds> <element_size> <num_runs> <read_percent> <insert_percent> <delete_percent> <reclamation> [num_threads]\n\n"
+        std::cerr << "Usage: ./bench <listnorec|list|tree> <test_length_seconds> <element_size> <num_runs> <read_percent> <insert_percent> <delete_percent> <reclamation> [num_threads]\n\n"
                   << "Arguments:\n"
-                  << "  <list|tree>              : The data structure to test\n"
+                  << "  <listnorec|list|tree>    : The data structure to test\n"
                   << "  <test_length_seconds>    : Duration of the test in seconds (e.g., 10)\n"
                   << "  <element_size>           : Number of elements (e.g., 512)\n"
                   << "  <num_runs>               : Number of times to repeat the benchmark (e.g., 5)\n"
@@ -32,7 +32,7 @@ int main(int argc, char* argv[]) {
     }
 
     std::string ds = argv[1];
-    bool isList = (ds == "list");
+    DsType dsType = (ds == "listnorec") ? DS_TYPE_LISTNOREC : ((ds == "list") ? DS_TYPE_LIST : DS_TYPE_TREE);
 
     int testLengthSeconds = std::stoi(argv[2]);
     int elementSize = std::stoi(argv[3]);
@@ -76,7 +76,7 @@ int main(int argc, char* argv[]) {
     }
 
     BenchmarkLists::allThroughputTests(
-        isList,
+        dsType,
         testLengthSeconds,
         elementSize,
         numRuns,

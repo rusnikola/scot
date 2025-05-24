@@ -8,10 +8,25 @@ import cairosvg
 
 BASE_DIR = '../Data/list_output_results'
 CHART_DIR = '../Data/list_charts'
-HATCHES = ['-', '\\', '/', '*', '+', 'x', 'O', '.']
-COLORS = ['gold', 'teal', 'm', 'c', 'blue', 'red', 'green', 'purple', 'orange', 'brown', 'pink', 'olive']
 SAVE_SUFFIX = '_throughput_plot'
 
+# Color by scheme
+COLOR_MAP = {
+    "NR": "#9467bd",      # Purple
+    "EBR": "#8c564b",     # Brown
+    "HP": "#1f77b4",      # Blue
+    "IBR": "#2ca02c",     # Green
+    "HE": "#d62728",      # Red
+    "HLN": "#ff7f0e"      # Orange
+}
+
+# Hatching by implementation
+HATCHES = {
+    "HMList": "//",       # HarrisMichael
+    "HList": "++"         # Harris
+}
+
+# Label mapping
 column_name_replacements = {
     "HarrisMichaelLinkedListNR": "HMList-NR",
     "HarrisLinkedListNR": "HList-NR",
@@ -94,8 +109,7 @@ for rw_dir in os.listdir(BASE_DIR):
 
         if not data_map: continue
 
-       
-        fig, ax = plt.subplots(figsize=(16, 11))
+        fig, ax = plt.subplots(figsize=(48, 12))
 
         benchmarks = sorted(data_map.keys(), key=benchmark_sort_key)
         num_benchmarks = len(benchmarks)
@@ -113,8 +127,14 @@ for rw_dir in os.listdir(BASE_DIR):
             offset = pair_index * (2 * bar_width + pair_spacing)
             if i % 2 == 1:
                 offset += bar_width
+
+            scheme = benchmark.split('-')[-1].replace(" (New)", "")
+            impl = "HList" if "HList" in benchmark else "HMList"
+
             ax.bar(index + offset, values, bar_width, label=benchmark,
-                   color=COLORS[i % len(COLORS)], hatch=HATCHES[i % len(HATCHES)], edgecolor='black')
+                   color=COLOR_MAP[scheme],
+                   hatch=HATCHES[impl],
+                   edgecolor='black')
 
         ax.set_xlabel('Threads', fontsize=36, fontweight='bold', labelpad=5)
         ax.set_ylabel('Throughput, ops/sec', fontsize=36, fontweight='bold', labelpad=25)
@@ -147,3 +167,4 @@ for rw_dir in os.listdir(BASE_DIR):
             print(f"Converted to PDF: {pdf_path}")
         except Exception as e:
             print(f"Failed to convert {svg_path} to PDF: {e}")
+

@@ -5,6 +5,10 @@ MYDEPS = \
 	HarrisLinkedListEBR.hpp \
 	HarrisLinkedListIBR.hpp \
 	HarrisLinkedListHyaline.hpp \
+	HarrisLinkedListRecHP.hpp \
+	HarrisLinkedListRecHE.hpp \
+	HarrisLinkedListRecIBR.hpp \
+	HarrisLinkedListRecHyaline.hpp \
 	HarrisMichaelLinkedListNR.hpp \
 	HarrisMichaelLinkedListHP.hpp \
 	HarrisMichaelLinkedListHE.hpp \

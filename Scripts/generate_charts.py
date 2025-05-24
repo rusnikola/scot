@@ -13,7 +13,9 @@ chart_scripts = [
     os.path.join(SCRIPTS_DIR, "generate_tree_throughput_legend.py"),
     os.path.join(SCRIPTS_DIR, "generate_tree_charts_throughput.py"),
     os.path.join(SCRIPTS_DIR, "generate_tree_memory_legend.py"),
-    os.path.join(SCRIPTS_DIR, "generate_tree_charts_memory.py")
+    os.path.join(SCRIPTS_DIR, "generate_tree_charts_memory.py"),
+    os.path.join(SCRIPTS_DIR, "generate_list_charts_throughput_rec_vs_norec.py"),
+    os.path.join(SCRIPTS_DIR, "generate_list_throughput_legend_rec_vs_norec.py")
 ]
 
 for script in chart_scripts:

@@ -19,14 +19,14 @@ for i, label in enumerate(labels):
     )
     handles.append(patch)
 
-fig, ax = plt.subplots(figsize=(12, 3))
+fig, ax = plt.subplots(figsize=(24, 1))
 ax.axis('off')
 
 legend = ax.legend(
     handles=handles,
     labels=labels,
     loc='center',
-    ncol=2,
+    ncol=6,
     fontsize=40,
     frameon=True,
     fancybox=False,
