@@ -98,7 +98,7 @@ public:
     ~HarrisMichaelLinkedListHyaline() {
     }
 
-    std::string className() { return "HarrisMichaelLinkedListHyaline"; }
+    std::string className() { return "HarrisMichaelLinkedListHYALINE"; }
 
 
     /**

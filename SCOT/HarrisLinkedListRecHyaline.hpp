@@ -35,8 +35,6 @@
 #include <string>
 #include "Hyaline.hpp"
 
-#define HYALINE_REC_BUFSIZE 8
-
 template<typename T, size_t N = 1>
 class HarrisLinkedListRecHyaline {
 
@@ -74,7 +72,7 @@ public:
 
     ~HarrisLinkedListRecHyaline() { }
 
-    std::string className() { return "HarrisLinkedListHyaline"; }
+    std::string className() { return "HarrisLinkedListHYALINE"; }
 
     bool insert(T *key, const int tid)
     {
@@ -123,17 +121,14 @@ public:
 
     bool search(T *key, const int tid)
     {
-        std::atomic<Node*> *prev[HYALINE_REC_BUFSIZE];
+        std::atomic<Node*> *prev;
         Node *curr, *next, *prev_next;
-        const size_t buffer_size = HYALINE_REC_BUFSIZE;
-        size_t p;
 
         hyaline.start_op(tid);
 again:
         prev_next = nullptr;
-        for (size_t bs = 0; bs < buffer_size; bs++) prev[bs] = &head;
-        p = 0;
-        curr = hyaline.protect(*prev[0], tid);
+        prev = &head;
+        curr = hyaline.protect(*prev, tid);
 
         while (true)
         {
@@ -141,23 +136,14 @@ again:
             next = hyaline.protect(curr->next, tid);
             if (!checkPtrMarked(next)) {
                 if (curr->key != nullptr && !(*curr->key < *key)) break;
-                p = (p + 1) % buffer_size;
-                prev[p] = &curr->next;
+                prev = &curr->next;
                 prev_next = next; // next is unmarked
             } else {
-                if (prev[p]->load() != prev_next) {
-                    size_t count = buffer_size;
-                    curr = hyaline.protect(*prev[p], tid);
-                    while (checkPtrMarked(curr)) {
-                        // ran out of prevs
-                        if (--count == 0) goto again;
-                        // analogous to retrying but need to erase the slot
-                        prev[p] = &head; // in case of multiple failures
-                        p = (p + buffer_size - 1) % buffer_size;
-                        curr = hyaline.protect(*prev[p], tid);
-                    }
+                if (prev->load() != prev_next) {
+                    curr = hyaline.protect(*prev, tid);
+                    if (checkPtrMarked(curr)) goto again;
                     // recover locally
-                    // prev[p] is already prev
+                    // prev is already retrieved
                     // curr is already unmarked and retrieved
                     prev_next = curr;
                     continue;
@@ -178,16 +164,13 @@ again:
 private:
     bool find(T *key, std::atomic<Node*> **pprev, Node **pcurr, Node **pnext, const int tid)
     {
-        std::atomic<Node*> *prev[HYALINE_REC_BUFSIZE];
+        std::atomic<Node*> *prev;
         Node *curr, *next, *prev_next;
-        const size_t buffer_size = HYALINE_REC_BUFSIZE;
-        size_t p;
 
 again:
         prev_next = nullptr;
-        for(size_t bs = 0; bs < buffer_size; bs++) prev[bs] = &head;
-        p = 0;
-        curr = hyaline.protect(*prev[0], tid);
+        prev = &head;
+        curr = hyaline.protect(*prev, tid);
 
         while (true)
         {
@@ -195,23 +178,14 @@ again:
             next = hyaline.protect(curr->next, tid);
             if (!checkPtrMarked(next)) {
                 if (curr->key != nullptr && !(*curr->key < *key)) break;
-                p = (p + 1) % buffer_size;
-                prev[p] = &curr->next;
+                prev = &curr->next;
                 prev_next = next; // next is unmarked
             } else {
-                if (prev[p]->load() != prev_next) {
-                    size_t count = buffer_size;
-                    curr = hyaline.protect(*prev[p], tid);
-                    while (checkPtrMarked(curr)) {
-                        // ran out of prevs
-                        if (--count == 0) goto again;
-                        // analogous to retrying but need to erase the slot
-                        prev[p] = &head; // in case of multiple failures
-                        p = (p + buffer_size - 1) % buffer_size;
-                        curr = hyaline.protect(*prev[p], tid);
-                    }
+                if (prev->load() != prev_next) {
+                    curr = hyaline.protect(*prev, tid);
+                    if (checkPtrMarked(curr)) goto again;
                     // recover locally
-                    // prev[p] is already prev
+                    // prev is already retrieved
                     // curr is already unmarked and retrieved
                     prev_next = curr;
                     continue;
@@ -222,7 +196,7 @@ again:
 
         // Some nodes in between
         if (prev_next != curr) {
-            if (!prev[p]->compare_exchange_strong(prev_next, curr)) goto again;
+            if (!prev->compare_exchange_strong(prev_next, curr)) goto again;
             // Retire nodes
             do {
                 Node *tmp = unmarkPtr(prev_next->next.load(std::memory_order_relaxed));
@@ -232,7 +206,7 @@ again:
         }
 
         *pcurr = curr;
-        *pprev = prev[p];
+        *pprev = prev;
         *pnext = next;
         return (curr && curr->key != nullptr && *curr->key == *key);
     }

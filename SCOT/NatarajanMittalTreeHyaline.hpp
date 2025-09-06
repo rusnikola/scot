@@ -103,7 +103,7 @@ public:
         delete[] records;
     }
 
-    std::string className() { return "NatarajanMittalTreeHyaline"; }
+    std::string className() { return "NatarajanMittalTreeHYALINE"; }
 
     void seek(const T *key, const int tid)
     {

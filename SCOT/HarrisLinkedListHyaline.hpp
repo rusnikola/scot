@@ -72,7 +72,7 @@ public:
 
     ~HarrisLinkedListHyaline() { }
 
-    std::string className() { return "HarrisLinkedListHyaline"; }
+    std::string className() { return "HarrisLinkedListHYALINE"; }
 
     bool insert(T *key, const int tid)
     {
