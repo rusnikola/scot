@@ -1,5 +1,31 @@
-#ifndef _TIM_HARRIS_LINKED_LIST_REC_HE_H_
-#define _TIM_HARRIS_LINKED_LIST_REC_HE_H_
+/*
+ * Copyright (c) 2024-2025, Md Amit Hasan Arovi, Ruslan Nikolaev
+ * All Rights Reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS
+ * OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ */
+
+#ifndef _TIM_HARRIS_LINKED_LIST_LF_HE_H_
+#define _TIM_HARRIS_LINKED_LIST_LF_HE_H_
 
 #include <atomic>
 #include <thread>
@@ -10,7 +36,7 @@
 #include "HazardEras.hpp"
 
 template<typename T, size_t N = 1>
-class HarrisLinkedListRecHE {
+class HarrisLinkedListLFHE {
 
 private:
 
@@ -48,11 +74,11 @@ private:
 
 public:
 
-    HarrisLinkedListRecHE(const int maxThreads) : maxThreads{maxThreads} {
+    HarrisLinkedListLFHE(const int maxThreads) : maxThreads{maxThreads} {
         head.store(he.init_object(new Node(nullptr), 0)); // sentinel node
     }
 
-    ~HarrisLinkedListRecHE() { }
+    ~HarrisLinkedListLFHE() { }
 
     std::string className() { return "HarrisLinkedListHE"; }
 
@@ -190,7 +216,7 @@ again:
                 he.protectEraRelease(kHe1, kHe0, tid);
                 next = he.protect(kHe0, curr->next, tid);
                 if (prev->load() != prev_next) {
-                    curr = he.protect(kHe1, *prev, tid);
+local_recovery:     curr = he.protect(kHe1, *prev, tid);
                     if (checkPtrMarked(curr)) goto again;
                     if (curr == nullptr) goto done;
                     prev_next = curr;
@@ -206,7 +232,9 @@ again:
 cleanup:
         // Some nodes in between
         if (prev_next != nullptr && prev_next != curr) {
-            if (!prev->compare_exchange_strong(prev_next, curr)) goto again;
+            if (!prev->compare_exchange_strong(prev_next, curr)) {
+                goto local_recovery;
+            }
             // Retire nodes
             do {
                 Node *tmp = unmarkPtr(prev_next->next.load(std::memory_order_relaxed));
@@ -223,4 +251,4 @@ done:
     }
 };
 
-#endif /* _TIM_HARRIS_LINKED_LIST_REC_HE_H_ */
+#endif /* _TIM_HARRIS_LINKED_LIST_LF_HE_H_ */

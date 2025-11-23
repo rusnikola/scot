@@ -1,0 +1,41 @@
+##### HarrisMichaelLinkedListIBR #####  
+
+
+#### RUN 1 RESULT: ####
+
+----- Benchmark=HarrisMichaelLinkedListIBR   numElements=10000   numThreads=32   testLength=10s -----
+Ops/sec = 1083253
+memory_usage (Bytes) = 2282
+
+
+###### MEDIAN RESULT FOR ALL 1 RUNS: ######
+
+----- Benchmark=HarrisMichaelLinkedListIBR   numElements=10000   numThreads=32   testLength=10s -----
+Ops/sec = 1083253   delta = 0%   min = 1083253   max = 1083253
+memory_usage = 2282   delta = 0%   min = 2282   max = 2282
+##### HarrisLinkedListIBR #####  
+
+
+#### RUN 1 RESULT: ####
+
+----- Benchmark=HarrisLinkedListIBR   numElements=10000   numThreads=32   testLength=10s -----
+Ops/sec = 1112307
+memory_usage (Bytes) = 2262
+
+
+###### MEDIAN RESULT FOR ALL 1 RUNS: ######
+
+----- Benchmark=HarrisLinkedListIBR   numElements=10000   numThreads=32   testLength=10s -----
+Ops/sec = 1112307   delta = 0%   min = 1112307   max = 1112307
+memory_usage = 2262   delta = 0%   min = 2262   max = 2262
+
+
+FINAL RESULTS (FOR CHARTS):
+
+
+Results in ops per second for numRuns=1,  length=10s 
+
+Number of elements: 10000
+
+Threads, HarrisMichaelLinkedListIBR, HarrisLinkedListIBR, HarrisMichaelLinkedListIBR_Memory_Usage, HarrisLinkedListIBR_Memory_Usage
+32, 1083253, 1112307, 2282, 2262, 

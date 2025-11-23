@@ -1,0 +1,41 @@
+##### HarrisMichaelLinkedListHPO #####  
+
+
+#### RUN 1 RESULT: ####
+
+----- Benchmark=HarrisMichaelLinkedListHPO   numElements=10000   numThreads=256   testLength=10s -----
+Ops/sec = 3734036
+memory_usage (Bytes) = 16124
+
+
+###### MEDIAN RESULT FOR ALL 1 RUNS: ######
+
+----- Benchmark=HarrisMichaelLinkedListHPO   numElements=10000   numThreads=256   testLength=10s -----
+Ops/sec = 3734036   delta = 0%   min = 3734036   max = 3734036
+memory_usage = 16124   delta = 0%   min = 16124   max = 16124
+##### HarrisLinkedListHPO #####  
+
+
+#### RUN 1 RESULT: ####
+
+----- Benchmark=HarrisLinkedListHPO   numElements=10000   numThreads=256   testLength=10s -----
+Ops/sec = 4145611
+memory_usage (Bytes) = 16125
+
+
+###### MEDIAN RESULT FOR ALL 1 RUNS: ######
+
+----- Benchmark=HarrisLinkedListHPO   numElements=10000   numThreads=256   testLength=10s -----
+Ops/sec = 4145611   delta = 0%   min = 4145611   max = 4145611
+memory_usage = 16125   delta = 0%   min = 16125   max = 16125
+
+
+FINAL RESULTS (FOR CHARTS):
+
+
+Results in ops per second for numRuns=1,  length=10s 
+
+Number of elements: 10000
+
+Threads, HarrisMichaelLinkedListHPO, HarrisLinkedListHPO, HarrisMichaelLinkedListHPO_Memory_Usage, HarrisLinkedListHPO_Memory_Usage
+256, 3734036, 4145611, 16124, 16125, 

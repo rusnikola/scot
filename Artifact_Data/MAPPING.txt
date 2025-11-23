@@ -1,0 +1,37 @@
+Mapping between files and corresponding figures in the paper
+
+Note that 'charts_full' contains charts with all data points. 'charts_paper' contains exactly the same charts, but for space efficiency, the paper charts do not include a few (unimportant) data points.
+
+NOTE: the run_* directory contains intermediate outputs of individual runs. See the corresponding *_output_results directories for final results.
+
+(1). Linked List
+
+- LOCATION: charts_paper/{listlf_charts,listwf_charts}
+
+Lock-Free (lf) and Wait-Free (wf) results are almost identical, we presented
+the wait-free results in the paper.
+
+- DIRECTORY: 50R_50W/KeyRange_512:
+
+50R_50W_KeyRange_512_throughput_plot                       :: Fig. 6(a)
+50R_50W_KeyRange_512_memory_plot                           :: Fig. 8(a)
+
+- DIRECTORY: 50R_50W/KeyRange_10000:
+
+50R_50W_KeyRange_10000_throughput_plot                     :: Fig. 6(b)
+50R_50W_KeyRange_10000_memory_plot                         :: Fig. 8(b)
+
+
+(2). NMTree
+
+- LOCATION: charts_paper/tree_charts
+
+- DIRECTORY: 50R_50W/KeyRange_128:
+
+50R_50W_KeyRange_128_throughput_plot                       :: Fig. 7(a)
+50R_50W_KeyRange_128_memory_plot                           :: Fig. 9(a)
+
+- DIRECTORY: 50R_50W/KeyRange_100000:
+
+50R_50W_KeyRange_100000_throughput_plot                    :: Fig. 7(b)
+50R_50W_KeyRange_100000_memory_plot                        :: Fig. 9(b)

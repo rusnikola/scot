@@ -1,0 +1,26 @@
+##### NatarajanMittalTreeEBR #####  
+
+
+#### RUN 1 RESULT: ####
+
+----- Benchmark=NatarajanMittalTreeEBR   numElements=100000   numThreads=128   testLength=10s -----
+Ops/sec = 134769790
+memory_usage (Bytes) = 9345
+
+
+###### MEDIAN RESULT FOR ALL 1 RUNS: ######
+
+----- Benchmark=NatarajanMittalTreeEBR   numElements=100000   numThreads=128   testLength=10s -----
+Ops/sec = 134769790   delta = 0%   min = 134769790   max = 134769790
+memory_usage = 9345   delta = 0%   min = 9345   max = 9345
+
+
+FINAL RESULTS (FOR CHARTS):
+
+
+Results in ops per second for numRuns=1,  length=10s 
+
+Number of elements: 100000
+
+Threads, NatarajanMittalTreeEBR, NatarajanMittalTreeEBR_Memory_Usage
+128, 134769790, 9345, 

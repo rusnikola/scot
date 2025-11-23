@@ -1,0 +1,41 @@
+##### HarrisMichaelLinkedListHYALINE #####  
+
+
+#### RUN 1 RESULT: ####
+
+----- Benchmark=HarrisMichaelLinkedListHYALINE   numElements=10000   numThreads=1   testLength=10s -----
+Ops/sec = 77447
+memory_usage (Bytes) = 0
+
+
+###### MEDIAN RESULT FOR ALL 1 RUNS: ######
+
+----- Benchmark=HarrisMichaelLinkedListHYALINE   numElements=10000   numThreads=1   testLength=10s -----
+Ops/sec = 77447   delta = 0%   min = 77447   max = 77447
+memory_usage = 0   delta = 0%   min = 0   max = 0
+##### HarrisLinkedListHYALINE #####  
+
+
+#### RUN 1 RESULT: ####
+
+----- Benchmark=HarrisLinkedListHYALINE   numElements=10000   numThreads=1   testLength=10s -----
+Ops/sec = 78315
+memory_usage (Bytes) = 0
+
+
+###### MEDIAN RESULT FOR ALL 1 RUNS: ######
+
+----- Benchmark=HarrisLinkedListHYALINE   numElements=10000   numThreads=1   testLength=10s -----
+Ops/sec = 78315   delta = 0%   min = 78315   max = 78315
+memory_usage = 0   delta = 0%   min = 0   max = 0
+
+
+FINAL RESULTS (FOR CHARTS):
+
+
+Results in ops per second for numRuns=1,  length=10s 
+
+Number of elements: 10000
+
+Threads, HarrisMichaelLinkedListHYALINE, HarrisLinkedListHYALINE, HarrisMichaelLinkedListHYALINE_Memory_Usage, HarrisLinkedListHYALINE_Memory_Usage
+1, 77447, 78315, 0, 0, 

@@ -15,16 +15,16 @@
 
 int main(int argc, char* argv[]) {
     if (argc < 9) {
-        std::cerr << "Usage: ./bench <listnorec|list|tree> <test_length_seconds> <element_size> <num_runs> <read_percent> <insert_percent> <delete_percent> <reclamation> [num_threads]\n\n"
+        std::cerr << "Usage: ./bench <listlf|listwf|tree> <test_length_seconds> <element_size> <num_runs> <read_percent> <insert_percent> <delete_percent> <reclamation> [num_threads]\n\n"
                   << "Arguments:\n"
-                  << "  <listnorec|list|tree>    : The data structure to test\n"
+                  << "  <listlf|listwf|tree>     : The data structure to test\n"
                   << "  <test_length_seconds>    : Duration of the test in seconds (e.g., 10)\n"
                   << "  <element_size>           : Number of elements (e.g., 512)\n"
                   << "  <num_runs>               : Number of times to repeat the benchmark (e.g., 5)\n"
                   << "  <read_percent>           : Percentage of read operations (e.g., 80 or 80%)\n"
                   << "  <insert_percent>         : Percentage of insert operations (e.g., 10 or 10%)\n"
                   << "  <delete_percent>         : Percentage of delete operations (e.g., 10 or 10%)\n"
-                  << "  <reclamation>            : Reclamation scheme: HP | EBR | NR | IBR | HE | HYALINE\n"
+                  << "  <reclamation>            : HP | HPO | EBR | NR | IBR | HE | HYALINE\n"
                   << "  [num_threads]            : (Optional) Number of threads to run (e.g., 64)\n\n"
                   << "Note: Sum of read, insert, and delete percentages must not exceed 100.\n"
                   << std::endl;
@@ -32,7 +32,7 @@ int main(int argc, char* argv[]) {
     }
 
     std::string ds = argv[1];
-    DsType dsType = (ds == "listnorec") ? DS_TYPE_LISTNOREC : ((ds == "list") ? DS_TYPE_LIST : DS_TYPE_TREE);
+    DsType dsType = (ds == "listlf") ? DS_TYPE_LISTLF : ((ds == "listwf") ? DS_TYPE_LISTWF : DS_TYPE_TREE);
 
     int testLengthSeconds = std::stoi(argv[2]);
     int elementSize = std::stoi(argv[3]);
@@ -59,8 +59,8 @@ int main(int argc, char* argv[]) {
     }
 
     std::string reclamation = argv[8];
-    if (reclamation != "HP" && reclamation != "EBR" && reclamation != "NR" && reclamation != "IBR" && reclamation != "HE" && reclamation != "HYALINE") {
-        std::cerr << "Invalid reclamation strategy. Use: HP | EBR | NR | IBR | HE | HYALINE\n";
+    if (reclamation != "HP" && reclamation != "HPO" && reclamation != "EBR" && reclamation != "NR" && reclamation != "IBR" && reclamation != "HE" && reclamation != "HYALINE") {
+        std::cerr << "Invalid reclamation strategy. Use: HP | HPO | EBR | NR | IBR | HE | HYALINE\n";
         return 1;
     }
 

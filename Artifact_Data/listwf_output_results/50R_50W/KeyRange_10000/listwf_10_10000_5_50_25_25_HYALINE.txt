@@ -1,0 +1,548 @@
+##### HarrisMichaelLinkedListHYALINE #####  
+
+#### RUN 1 RESULT: ####
+
+----- Benchmark=HarrisMichaelLinkedListHYALINE   numElements=10000   numThreads=1   testLength=10s -----
+Ops/sec = 76547
+memory_usage (Bytes) = 0
+
+#### RUN 2 RESULT: ####
+
+----- Benchmark=HarrisMichaelLinkedListHYALINE   numElements=10000   numThreads=1   testLength=10s -----
+Ops/sec = 76294
+memory_usage (Bytes) = 0
+
+#### RUN 3 RESULT: ####
+
+----- Benchmark=HarrisMichaelLinkedListHYALINE   numElements=10000   numThreads=1   testLength=10s -----
+Ops/sec = 76523
+memory_usage (Bytes) = 0
+
+#### RUN 4 RESULT: ####
+
+----- Benchmark=HarrisMichaelLinkedListHYALINE   numElements=10000   numThreads=1   testLength=10s -----
+Ops/sec = 77129
+memory_usage (Bytes) = 0
+
+#### RUN 5 RESULT: ####
+
+----- Benchmark=HarrisMichaelLinkedListHYALINE   numElements=10000   numThreads=1   testLength=10s -----
+Ops/sec = 76939
+memory_usage (Bytes) = 0
+
+###### MEDIAN RESULT FOR ALL 5 RUNS: ######
+
+----- Benchmark=HarrisMichaelLinkedListHYALINE   numElements=10000   numThreads=1   testLength=10s -----
+Ops/sec = 76547   delta = 1%   min = 76294   max = 77129
+memory_usage = 0   delta = 0%   min = 0   max = 0
+
+##### HarrisLinkedListHYALINE #####  
+
+#### RUN 1 RESULT: ####
+
+----- Benchmark=HarrisLinkedListHYALINE   numElements=10000   numThreads=1   testLength=10s -----
+Ops/sec = 78226
+memory_usage (Bytes) = 0
+
+#### RUN 2 RESULT: ####
+
+----- Benchmark=HarrisLinkedListHYALINE   numElements=10000   numThreads=1   testLength=10s -----
+Ops/sec = 78137
+memory_usage (Bytes) = 0
+
+#### RUN 3 RESULT: ####
+
+----- Benchmark=HarrisLinkedListHYALINE   numElements=10000   numThreads=1   testLength=10s -----
+Ops/sec = 78863
+memory_usage (Bytes) = 0
+
+#### RUN 4 RESULT: ####
+
+----- Benchmark=HarrisLinkedListHYALINE   numElements=10000   numThreads=1   testLength=10s -----
+Ops/sec = 78805
+memory_usage (Bytes) = 0
+
+#### RUN 5 RESULT: ####
+
+----- Benchmark=HarrisLinkedListHYALINE   numElements=10000   numThreads=1   testLength=10s -----
+Ops/sec = 78577
+memory_usage (Bytes) = 0
+
+###### MEDIAN RESULT FOR ALL 5 RUNS: ######
+
+----- Benchmark=HarrisLinkedListHYALINE   numElements=10000   numThreads=1   testLength=10s -----
+Ops/sec = 78577   delta = 0%   min = 78137   max = 78863
+memory_usage = 0   delta = 0%   min = 0   max = 0
+
+##### HarrisMichaelLinkedListHYALINE #####  
+
+#### RUN 1 RESULT: ####
+
+----- Benchmark=HarrisMichaelLinkedListHYALINE   numElements=10000   numThreads=16   testLength=10s -----
+Ops/sec = 762580
+memory_usage (Bytes) = 0
+
+#### RUN 2 RESULT: ####
+
+----- Benchmark=HarrisMichaelLinkedListHYALINE   numElements=10000   numThreads=16   testLength=10s -----
+Ops/sec = 756034
+memory_usage (Bytes) = 0
+
+#### RUN 3 RESULT: ####
+
+----- Benchmark=HarrisMichaelLinkedListHYALINE   numElements=10000   numThreads=16   testLength=10s -----
+Ops/sec = 764102
+memory_usage (Bytes) = 0
+
+#### RUN 4 RESULT: ####
+
+----- Benchmark=HarrisMichaelLinkedListHYALINE   numElements=10000   numThreads=16   testLength=10s -----
+Ops/sec = 758503
+memory_usage (Bytes) = 0
+
+#### RUN 5 RESULT: ####
+
+----- Benchmark=HarrisMichaelLinkedListHYALINE   numElements=10000   numThreads=16   testLength=10s -----
+Ops/sec = 763688
+memory_usage (Bytes) = 0
+
+###### MEDIAN RESULT FOR ALL 5 RUNS: ######
+
+----- Benchmark=HarrisMichaelLinkedListHYALINE   numElements=10000   numThreads=16   testLength=10s -----
+Ops/sec = 762580   delta = 1%   min = 756034   max = 764102
+memory_usage = 0   delta = 0%   min = 0   max = 0
+
+##### HarrisLinkedListHYALINE #####  
+
+#### RUN 1 RESULT: ####
+
+----- Benchmark=HarrisLinkedListHYALINE   numElements=10000   numThreads=16   testLength=10s -----
+Ops/sec = 754447
+memory_usage (Bytes) = 0
+
+#### RUN 2 RESULT: ####
+
+----- Benchmark=HarrisLinkedListHYALINE   numElements=10000   numThreads=16   testLength=10s -----
+Ops/sec = 753193
+memory_usage (Bytes) = 0
+
+#### RUN 3 RESULT: ####
+
+----- Benchmark=HarrisLinkedListHYALINE   numElements=10000   numThreads=16   testLength=10s -----
+Ops/sec = 745577
+memory_usage (Bytes) = 0
+
+#### RUN 4 RESULT: ####
+
+----- Benchmark=HarrisLinkedListHYALINE   numElements=10000   numThreads=16   testLength=10s -----
+Ops/sec = 758497
+memory_usage (Bytes) = 0
+
+#### RUN 5 RESULT: ####
+
+----- Benchmark=HarrisLinkedListHYALINE   numElements=10000   numThreads=16   testLength=10s -----
+Ops/sec = 756071
+memory_usage (Bytes) = 0
+
+###### MEDIAN RESULT FOR ALL 5 RUNS: ######
+
+----- Benchmark=HarrisLinkedListHYALINE   numElements=10000   numThreads=16   testLength=10s -----
+Ops/sec = 754447   delta = 1%   min = 745577   max = 758497
+memory_usage = 0   delta = 0%   min = 0   max = 0
+
+##### HarrisMichaelLinkedListHYALINE #####  
+
+#### RUN 1 RESULT: ####
+
+----- Benchmark=HarrisMichaelLinkedListHYALINE   numElements=10000   numThreads=32   testLength=10s -----
+Ops/sec = 1086692
+memory_usage (Bytes) = 0
+
+#### RUN 2 RESULT: ####
+
+----- Benchmark=HarrisMichaelLinkedListHYALINE   numElements=10000   numThreads=32   testLength=10s -----
+Ops/sec = 1091705
+memory_usage (Bytes) = 0
+
+#### RUN 3 RESULT: ####
+
+----- Benchmark=HarrisMichaelLinkedListHYALINE   numElements=10000   numThreads=32   testLength=10s -----
+Ops/sec = 1082440
+memory_usage (Bytes) = 0
+
+#### RUN 4 RESULT: ####
+
+----- Benchmark=HarrisMichaelLinkedListHYALINE   numElements=10000   numThreads=32   testLength=10s -----
+Ops/sec = 1087431
+memory_usage (Bytes) = 0
+
+#### RUN 5 RESULT: ####
+
+----- Benchmark=HarrisMichaelLinkedListHYALINE   numElements=10000   numThreads=32   testLength=10s -----
+Ops/sec = 1087099
+memory_usage (Bytes) = 0
+
+###### MEDIAN RESULT FOR ALL 5 RUNS: ######
+
+----- Benchmark=HarrisMichaelLinkedListHYALINE   numElements=10000   numThreads=32   testLength=10s -----
+Ops/sec = 1087099   delta = 0%   min = 1082440   max = 1091705
+memory_usage = 0   delta = 0%   min = 0   max = 0
+
+##### HarrisLinkedListHYALINE #####  
+
+#### RUN 1 RESULT: ####
+
+----- Benchmark=HarrisLinkedListHYALINE   numElements=10000   numThreads=32   testLength=10s -----
+Ops/sec = 1117550
+memory_usage (Bytes) = 0
+
+#### RUN 2 RESULT: ####
+
+----- Benchmark=HarrisLinkedListHYALINE   numElements=10000   numThreads=32   testLength=10s -----
+Ops/sec = 1100000
+memory_usage (Bytes) = 0
+
+#### RUN 3 RESULT: ####
+
+----- Benchmark=HarrisLinkedListHYALINE   numElements=10000   numThreads=32   testLength=10s -----
+Ops/sec = 1114227
+memory_usage (Bytes) = 0
+
+#### RUN 4 RESULT: ####
+
+----- Benchmark=HarrisLinkedListHYALINE   numElements=10000   numThreads=32   testLength=10s -----
+Ops/sec = 1114585
+memory_usage (Bytes) = 0
+
+#### RUN 5 RESULT: ####
+
+----- Benchmark=HarrisLinkedListHYALINE   numElements=10000   numThreads=32   testLength=10s -----
+Ops/sec = 1116810
+memory_usage (Bytes) = 0
+
+###### MEDIAN RESULT FOR ALL 5 RUNS: ######
+
+----- Benchmark=HarrisLinkedListHYALINE   numElements=10000   numThreads=32   testLength=10s -----
+Ops/sec = 1114585   delta = 1%   min = 1100000   max = 1117550
+memory_usage = 0   delta = 0%   min = 0   max = 0
+
+##### HarrisMichaelLinkedListHYALINE #####  
+
+#### RUN 1 RESULT: ####
+
+----- Benchmark=HarrisMichaelLinkedListHYALINE   numElements=10000   numThreads=64   testLength=10s -----
+Ops/sec = 1791290
+memory_usage (Bytes) = 0
+
+#### RUN 2 RESULT: ####
+
+----- Benchmark=HarrisMichaelLinkedListHYALINE   numElements=10000   numThreads=64   testLength=10s -----
+Ops/sec = 1794293
+memory_usage (Bytes) = 0
+
+#### RUN 3 RESULT: ####
+
+----- Benchmark=HarrisMichaelLinkedListHYALINE   numElements=10000   numThreads=64   testLength=10s -----
+Ops/sec = 1794478
+memory_usage (Bytes) = 0
+
+#### RUN 4 RESULT: ####
+
+----- Benchmark=HarrisMichaelLinkedListHYALINE   numElements=10000   numThreads=64   testLength=10s -----
+Ops/sec = 1789526
+memory_usage (Bytes) = 0
+
+#### RUN 5 RESULT: ####
+
+----- Benchmark=HarrisMichaelLinkedListHYALINE   numElements=10000   numThreads=64   testLength=10s -----
+Ops/sec = 1794108
+memory_usage (Bytes) = 0
+
+###### MEDIAN RESULT FOR ALL 5 RUNS: ######
+
+----- Benchmark=HarrisMichaelLinkedListHYALINE   numElements=10000   numThreads=64   testLength=10s -----
+Ops/sec = 1794108   delta = 0%   min = 1789526   max = 1794478
+memory_usage = 0   delta = 0%   min = 0   max = 0
+
+##### HarrisLinkedListHYALINE #####  
+
+#### RUN 1 RESULT: ####
+
+----- Benchmark=HarrisLinkedListHYALINE   numElements=10000   numThreads=64   testLength=10s -----
+Ops/sec = 1841804
+memory_usage (Bytes) = 0
+
+#### RUN 2 RESULT: ####
+
+----- Benchmark=HarrisLinkedListHYALINE   numElements=10000   numThreads=64   testLength=10s -----
+Ops/sec = 1858049
+memory_usage (Bytes) = 0
+
+#### RUN 3 RESULT: ####
+
+----- Benchmark=HarrisLinkedListHYALINE   numElements=10000   numThreads=64   testLength=10s -----
+Ops/sec = 1800901
+memory_usage (Bytes) = 0
+
+#### RUN 4 RESULT: ####
+
+----- Benchmark=HarrisLinkedListHYALINE   numElements=10000   numThreads=64   testLength=10s -----
+Ops/sec = 1810586
+memory_usage (Bytes) = 0
+
+#### RUN 5 RESULT: ####
+
+----- Benchmark=HarrisLinkedListHYALINE   numElements=10000   numThreads=64   testLength=10s -----
+Ops/sec = 1849719
+memory_usage (Bytes) = 0
+
+###### MEDIAN RESULT FOR ALL 5 RUNS: ######
+
+----- Benchmark=HarrisLinkedListHYALINE   numElements=10000   numThreads=64   testLength=10s -----
+Ops/sec = 1841804   delta = 3%   min = 1800901   max = 1858049
+memory_usage = 0   delta = 0%   min = 0   max = 0
+
+##### HarrisMichaelLinkedListHYALINE #####  
+
+#### RUN 1 RESULT: ####
+
+----- Benchmark=HarrisMichaelLinkedListHYALINE   numElements=10000   numThreads=128   testLength=10s -----
+Ops/sec = 2943739
+memory_usage (Bytes) = 0
+
+#### RUN 2 RESULT: ####
+
+----- Benchmark=HarrisMichaelLinkedListHYALINE   numElements=10000   numThreads=128   testLength=10s -----
+Ops/sec = 2943559
+memory_usage (Bytes) = 0
+
+#### RUN 3 RESULT: ####
+
+----- Benchmark=HarrisMichaelLinkedListHYALINE   numElements=10000   numThreads=128   testLength=10s -----
+Ops/sec = 2935754
+memory_usage (Bytes) = 0
+
+#### RUN 4 RESULT: ####
+
+----- Benchmark=HarrisMichaelLinkedListHYALINE   numElements=10000   numThreads=128   testLength=10s -----
+Ops/sec = 2944771
+memory_usage (Bytes) = 0
+
+#### RUN 5 RESULT: ####
+
+----- Benchmark=HarrisMichaelLinkedListHYALINE   numElements=10000   numThreads=128   testLength=10s -----
+Ops/sec = 2932118
+memory_usage (Bytes) = 0
+
+###### MEDIAN RESULT FOR ALL 5 RUNS: ######
+
+----- Benchmark=HarrisMichaelLinkedListHYALINE   numElements=10000   numThreads=128   testLength=10s -----
+Ops/sec = 2943559   delta = 0%   min = 2932118   max = 2944771
+memory_usage = 0   delta = 0%   min = 0   max = 0
+
+##### HarrisLinkedListHYALINE #####  
+
+#### RUN 1 RESULT: ####
+
+----- Benchmark=HarrisLinkedListHYALINE   numElements=10000   numThreads=128   testLength=10s -----
+Ops/sec = 2963085
+memory_usage (Bytes) = 0
+
+#### RUN 2 RESULT: ####
+
+----- Benchmark=HarrisLinkedListHYALINE   numElements=10000   numThreads=128   testLength=10s -----
+Ops/sec = 2962667
+memory_usage (Bytes) = 0
+
+#### RUN 3 RESULT: ####
+
+----- Benchmark=HarrisLinkedListHYALINE   numElements=10000   numThreads=128   testLength=10s -----
+Ops/sec = 2957563
+memory_usage (Bytes) = 0
+
+#### RUN 4 RESULT: ####
+
+----- Benchmark=HarrisLinkedListHYALINE   numElements=10000   numThreads=128   testLength=10s -----
+Ops/sec = 2950243
+memory_usage (Bytes) = 0
+
+#### RUN 5 RESULT: ####
+
+----- Benchmark=HarrisLinkedListHYALINE   numElements=10000   numThreads=128   testLength=10s -----
+Ops/sec = 2956635
+memory_usage (Bytes) = 0
+
+###### MEDIAN RESULT FOR ALL 5 RUNS: ######
+
+----- Benchmark=HarrisLinkedListHYALINE   numElements=10000   numThreads=128   testLength=10s -----
+Ops/sec = 2957563   delta = 0%   min = 2950243   max = 2963085
+memory_usage = 0   delta = 0%   min = 0   max = 0
+
+##### HarrisMichaelLinkedListHYALINE #####  
+
+#### RUN 1 RESULT: ####
+
+----- Benchmark=HarrisMichaelLinkedListHYALINE   numElements=10000   numThreads=256   testLength=10s -----
+Ops/sec = 4233790
+memory_usage (Bytes) = 0
+
+#### RUN 2 RESULT: ####
+
+----- Benchmark=HarrisMichaelLinkedListHYALINE   numElements=10000   numThreads=256   testLength=10s -----
+Ops/sec = 4243112
+memory_usage (Bytes) = 0
+
+#### RUN 3 RESULT: ####
+
+----- Benchmark=HarrisMichaelLinkedListHYALINE   numElements=10000   numThreads=256   testLength=10s -----
+Ops/sec = 4230973
+memory_usage (Bytes) = 0
+
+#### RUN 4 RESULT: ####
+
+----- Benchmark=HarrisMichaelLinkedListHYALINE   numElements=10000   numThreads=256   testLength=10s -----
+Ops/sec = 4216922
+memory_usage (Bytes) = 0
+
+#### RUN 5 RESULT: ####
+
+----- Benchmark=HarrisMichaelLinkedListHYALINE   numElements=10000   numThreads=256   testLength=10s -----
+Ops/sec = 4238961
+memory_usage (Bytes) = 0
+
+###### MEDIAN RESULT FOR ALL 5 RUNS: ######
+
+----- Benchmark=HarrisMichaelLinkedListHYALINE   numElements=10000   numThreads=256   testLength=10s -----
+Ops/sec = 4233790   delta = 0%   min = 4216922   max = 4243112
+memory_usage = 0   delta = 0%   min = 0   max = 0
+
+##### HarrisLinkedListHYALINE #####  
+
+#### RUN 1 RESULT: ####
+
+----- Benchmark=HarrisLinkedListHYALINE   numElements=10000   numThreads=256   testLength=10s -----
+Ops/sec = 4595012
+memory_usage (Bytes) = 0
+
+#### RUN 2 RESULT: ####
+
+----- Benchmark=HarrisLinkedListHYALINE   numElements=10000   numThreads=256   testLength=10s -----
+Ops/sec = 4600183
+memory_usage (Bytes) = 0
+
+#### RUN 3 RESULT: ####
+
+----- Benchmark=HarrisLinkedListHYALINE   numElements=10000   numThreads=256   testLength=10s -----
+Ops/sec = 4599877
+memory_usage (Bytes) = 0
+
+#### RUN 4 RESULT: ####
+
+----- Benchmark=HarrisLinkedListHYALINE   numElements=10000   numThreads=256   testLength=10s -----
+Ops/sec = 4594308
+memory_usage (Bytes) = 0
+
+#### RUN 5 RESULT: ####
+
+----- Benchmark=HarrisLinkedListHYALINE   numElements=10000   numThreads=256   testLength=10s -----
+Ops/sec = 4598924
+memory_usage (Bytes) = 0
+
+###### MEDIAN RESULT FOR ALL 5 RUNS: ######
+
+----- Benchmark=HarrisLinkedListHYALINE   numElements=10000   numThreads=256   testLength=10s -----
+Ops/sec = 4598924   delta = 0%   min = 4594308   max = 4600183
+memory_usage = 0   delta = 0%   min = 0   max = 0
+
+##### HarrisMichaelLinkedListHYALINE #####  
+
+#### RUN 1 RESULT: ####
+
+----- Benchmark=HarrisMichaelLinkedListHYALINE   numElements=10000   numThreads=384   testLength=10s -----
+Ops/sec = 4083026
+memory_usage (Bytes) = 0
+
+#### RUN 2 RESULT: ####
+
+----- Benchmark=HarrisMichaelLinkedListHYALINE   numElements=10000   numThreads=384   testLength=10s -----
+Ops/sec = 4071666
+memory_usage (Bytes) = 0
+
+#### RUN 3 RESULT: ####
+
+----- Benchmark=HarrisMichaelLinkedListHYALINE   numElements=10000   numThreads=384   testLength=10s -----
+Ops/sec = 4054766
+memory_usage (Bytes) = 0
+
+#### RUN 4 RESULT: ####
+
+----- Benchmark=HarrisMichaelLinkedListHYALINE   numElements=10000   numThreads=384   testLength=10s -----
+Ops/sec = 4070962
+memory_usage (Bytes) = 0
+
+#### RUN 5 RESULT: ####
+
+----- Benchmark=HarrisMichaelLinkedListHYALINE   numElements=10000   numThreads=384   testLength=10s -----
+Ops/sec = 4071634
+memory_usage (Bytes) = 0
+
+###### MEDIAN RESULT FOR ALL 5 RUNS: ######
+
+----- Benchmark=HarrisMichaelLinkedListHYALINE   numElements=10000   numThreads=384   testLength=10s -----
+Ops/sec = 4071634   delta = 0%   min = 4054766   max = 4083026
+memory_usage = 0   delta = 0%   min = 0   max = 0
+
+##### HarrisLinkedListHYALINE #####  
+
+#### RUN 1 RESULT: ####
+
+----- Benchmark=HarrisLinkedListHYALINE   numElements=10000   numThreads=384   testLength=10s -----
+Ops/sec = 4459953
+memory_usage (Bytes) = 0
+
+#### RUN 2 RESULT: ####
+
+----- Benchmark=HarrisLinkedListHYALINE   numElements=10000   numThreads=384   testLength=10s -----
+Ops/sec = 4434163
+memory_usage (Bytes) = 0
+
+#### RUN 3 RESULT: ####
+
+----- Benchmark=HarrisLinkedListHYALINE   numElements=10000   numThreads=384   testLength=10s -----
+Ops/sec = 4440131
+memory_usage (Bytes) = 0
+
+#### RUN 4 RESULT: ####
+
+----- Benchmark=HarrisLinkedListHYALINE   numElements=10000   numThreads=384   testLength=10s -----
+Ops/sec = 4452219
+memory_usage (Bytes) = 0
+
+#### RUN 5 RESULT: ####
+
+----- Benchmark=HarrisLinkedListHYALINE   numElements=10000   numThreads=384   testLength=10s -----
+Ops/sec = 4450072
+memory_usage (Bytes) = 0
+
+###### MEDIAN RESULT FOR ALL 5 RUNS: ######
+
+----- Benchmark=HarrisLinkedListHYALINE   numElements=10000   numThreads=384   testLength=10s -----
+Ops/sec = 4450072   delta = 0%   min = 4434163   max = 4459953
+memory_usage = 0   delta = 0%   min = 0   max = 0
+
+
+FINAL RESULTS (FOR CHARTS):
+
+Results in ops per second for numRuns=5,  length=10s 
+
+Number of elements: 10000
+
+Threads, HarrisMichaelLinkedListHYALINE, HarrisLinkedListHYALINE, HarrisMichaelLinkedListHYALINE_Memory_Usage, HarrisLinkedListHYALINE_Memory_Usage
+1, 76547, 78577, 0, 0, 
+16, 762580, 754447, 0, 0, 
+32, 1087099, 1114585, 0, 0, 
+64, 1794108, 1841804, 0, 0, 
+128, 2943559, 2957563, 0, 0, 
+256, 4233790, 4598924, 0, 0, 
+384, 4071634, 4450072, 0, 0, 
+

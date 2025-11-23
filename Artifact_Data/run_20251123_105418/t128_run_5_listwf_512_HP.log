@@ -1,0 +1,41 @@
+##### HarrisMichaelLinkedListHP #####  
+
+
+#### RUN 1 RESULT: ####
+
+----- Benchmark=HarrisMichaelLinkedListHP   numElements=512   numThreads=128   testLength=10s -----
+Ops/sec = 23441811
+memory_usage (Bytes) = 8064
+
+
+###### MEDIAN RESULT FOR ALL 1 RUNS: ######
+
+----- Benchmark=HarrisMichaelLinkedListHP   numElements=512   numThreads=128   testLength=10s -----
+Ops/sec = 23441811   delta = 0%   min = 23441811   max = 23441811
+memory_usage = 8064   delta = 0%   min = 8064   max = 8064
+##### HarrisLinkedListHP #####  
+
+
+#### RUN 1 RESULT: ####
+
+----- Benchmark=HarrisLinkedListHP   numElements=512   numThreads=128   testLength=10s -----
+Ops/sec = 30738606
+memory_usage (Bytes) = 8064
+
+
+###### MEDIAN RESULT FOR ALL 1 RUNS: ######
+
+----- Benchmark=HarrisLinkedListHP   numElements=512   numThreads=128   testLength=10s -----
+Ops/sec = 30738606   delta = 0%   min = 30738606   max = 30738606
+memory_usage = 8064   delta = 0%   min = 8064   max = 8064
+
+
+FINAL RESULTS (FOR CHARTS):
+
+
+Results in ops per second for numRuns=1,  length=10s 
+
+Number of elements: 512
+
+Threads, HarrisMichaelLinkedListHP, HarrisLinkedListHP, HarrisMichaelLinkedListHP_Memory_Usage, HarrisLinkedListHP_Memory_Usage
+128, 23441811, 30738606, 8064, 8064, 

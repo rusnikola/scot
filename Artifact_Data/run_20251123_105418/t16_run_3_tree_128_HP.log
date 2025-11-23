@@ -1,0 +1,26 @@
+##### NatarajanMittalTreeHP #####  
+
+
+#### RUN 1 RESULT: ####
+
+----- Benchmark=NatarajanMittalTreeHP   numElements=128   numThreads=16   testLength=10s -----
+Ops/sec = 24849008
+memory_usage (Bytes) = 1040
+
+
+###### MEDIAN RESULT FOR ALL 1 RUNS: ######
+
+----- Benchmark=NatarajanMittalTreeHP   numElements=128   numThreads=16   testLength=10s -----
+Ops/sec = 24849008   delta = 0%   min = 24849008   max = 24849008
+memory_usage = 1040   delta = 0%   min = 1040   max = 1040
+
+
+FINAL RESULTS (FOR CHARTS):
+
+
+Results in ops per second for numRuns=1,  length=10s 
+
+Number of elements: 128
+
+Threads, NatarajanMittalTreeHP, NatarajanMittalTreeHP_Memory_Usage
+16, 24849008, 1040, 

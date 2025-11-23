@@ -1,0 +1,282 @@
+##### NatarajanMittalTreeNR #####  
+
+#### RUN 1 RESULT: ####
+
+----- Benchmark=NatarajanMittalTreeNR   numElements=128   numThreads=1   testLength=10s -----
+Ops/sec = 10168566
+memory_usage (Bytes) = 0
+
+#### RUN 2 RESULT: ####
+
+----- Benchmark=NatarajanMittalTreeNR   numElements=128   numThreads=1   testLength=10s -----
+Ops/sec = 10162015
+memory_usage (Bytes) = 0
+
+#### RUN 3 RESULT: ####
+
+----- Benchmark=NatarajanMittalTreeNR   numElements=128   numThreads=1   testLength=10s -----
+Ops/sec = 10152926
+memory_usage (Bytes) = 0
+
+#### RUN 4 RESULT: ####
+
+----- Benchmark=NatarajanMittalTreeNR   numElements=128   numThreads=1   testLength=10s -----
+Ops/sec = 10158196
+memory_usage (Bytes) = 0
+
+#### RUN 5 RESULT: ####
+
+----- Benchmark=NatarajanMittalTreeNR   numElements=128   numThreads=1   testLength=10s -----
+Ops/sec = 10167748
+memory_usage (Bytes) = 0
+
+###### MEDIAN RESULT FOR ALL 5 RUNS: ######
+
+----- Benchmark=NatarajanMittalTreeNR   numElements=128   numThreads=1   testLength=10s -----
+Ops/sec = 10162015   delta = 0%   min = 10152926   max = 10168566
+memory_usage = 0   delta = 0%   min = 0   max = 0
+
+##### NatarajanMittalTreeNR #####  
+
+#### RUN 1 RESULT: ####
+
+----- Benchmark=NatarajanMittalTreeNR   numElements=128   numThreads=16   testLength=10s -----
+Ops/sec = 37241687
+memory_usage (Bytes) = 0
+
+#### RUN 2 RESULT: ####
+
+----- Benchmark=NatarajanMittalTreeNR   numElements=128   numThreads=16   testLength=10s -----
+Ops/sec = 37034507
+memory_usage (Bytes) = 0
+
+#### RUN 3 RESULT: ####
+
+----- Benchmark=NatarajanMittalTreeNR   numElements=128   numThreads=16   testLength=10s -----
+Ops/sec = 37067433
+memory_usage (Bytes) = 0
+
+#### RUN 4 RESULT: ####
+
+----- Benchmark=NatarajanMittalTreeNR   numElements=128   numThreads=16   testLength=10s -----
+Ops/sec = 37127395
+memory_usage (Bytes) = 0
+
+#### RUN 5 RESULT: ####
+
+----- Benchmark=NatarajanMittalTreeNR   numElements=128   numThreads=16   testLength=10s -----
+Ops/sec = 37058543
+memory_usage (Bytes) = 0
+
+###### MEDIAN RESULT FOR ALL 5 RUNS: ######
+
+----- Benchmark=NatarajanMittalTreeNR   numElements=128   numThreads=16   testLength=10s -----
+Ops/sec = 37067433   delta = 0%   min = 37034507   max = 37241687
+memory_usage = 0   delta = 0%   min = 0   max = 0
+
+##### NatarajanMittalTreeNR #####  
+
+#### RUN 1 RESULT: ####
+
+----- Benchmark=NatarajanMittalTreeNR   numElements=128   numThreads=32   testLength=10s -----
+Ops/sec = 56939964
+memory_usage (Bytes) = 0
+
+#### RUN 2 RESULT: ####
+
+----- Benchmark=NatarajanMittalTreeNR   numElements=128   numThreads=32   testLength=10s -----
+Ops/sec = 56959376
+memory_usage (Bytes) = 0
+
+#### RUN 3 RESULT: ####
+
+----- Benchmark=NatarajanMittalTreeNR   numElements=128   numThreads=32   testLength=10s -----
+Ops/sec = 56947032
+memory_usage (Bytes) = 0
+
+#### RUN 4 RESULT: ####
+
+----- Benchmark=NatarajanMittalTreeNR   numElements=128   numThreads=32   testLength=10s -----
+Ops/sec = 56958693
+memory_usage (Bytes) = 0
+
+#### RUN 5 RESULT: ####
+
+----- Benchmark=NatarajanMittalTreeNR   numElements=128   numThreads=32   testLength=10s -----
+Ops/sec = 56940673
+memory_usage (Bytes) = 0
+
+###### MEDIAN RESULT FOR ALL 5 RUNS: ######
+
+----- Benchmark=NatarajanMittalTreeNR   numElements=128   numThreads=32   testLength=10s -----
+Ops/sec = 56947032   delta = 0%   min = 56939964   max = 56959376
+memory_usage = 0   delta = 0%   min = 0   max = 0
+
+##### NatarajanMittalTreeNR #####  
+
+#### RUN 1 RESULT: ####
+
+----- Benchmark=NatarajanMittalTreeNR   numElements=128   numThreads=64   testLength=10s -----
+Ops/sec = 74493648
+memory_usage (Bytes) = 0
+
+#### RUN 2 RESULT: ####
+
+----- Benchmark=NatarajanMittalTreeNR   numElements=128   numThreads=64   testLength=10s -----
+Ops/sec = 74419346
+memory_usage (Bytes) = 0
+
+#### RUN 3 RESULT: ####
+
+----- Benchmark=NatarajanMittalTreeNR   numElements=128   numThreads=64   testLength=10s -----
+Ops/sec = 74416820
+memory_usage (Bytes) = 0
+
+#### RUN 4 RESULT: ####
+
+----- Benchmark=NatarajanMittalTreeNR   numElements=128   numThreads=64   testLength=10s -----
+Ops/sec = 74481999
+memory_usage (Bytes) = 0
+
+#### RUN 5 RESULT: ####
+
+----- Benchmark=NatarajanMittalTreeNR   numElements=128   numThreads=64   testLength=10s -----
+Ops/sec = 74447367
+memory_usage (Bytes) = 0
+
+###### MEDIAN RESULT FOR ALL 5 RUNS: ######
+
+----- Benchmark=NatarajanMittalTreeNR   numElements=128   numThreads=64   testLength=10s -----
+Ops/sec = 74447367   delta = 0%   min = 74416820   max = 74493648
+memory_usage = 0   delta = 0%   min = 0   max = 0
+
+##### NatarajanMittalTreeNR #####  
+
+#### RUN 1 RESULT: ####
+
+----- Benchmark=NatarajanMittalTreeNR   numElements=128   numThreads=128   testLength=10s -----
+Ops/sec = 86729265
+memory_usage (Bytes) = 0
+
+#### RUN 2 RESULT: ####
+
+----- Benchmark=NatarajanMittalTreeNR   numElements=128   numThreads=128   testLength=10s -----
+Ops/sec = 86765304
+memory_usage (Bytes) = 0
+
+#### RUN 3 RESULT: ####
+
+----- Benchmark=NatarajanMittalTreeNR   numElements=128   numThreads=128   testLength=10s -----
+Ops/sec = 86681583
+memory_usage (Bytes) = 0
+
+#### RUN 4 RESULT: ####
+
+----- Benchmark=NatarajanMittalTreeNR   numElements=128   numThreads=128   testLength=10s -----
+Ops/sec = 86736992
+memory_usage (Bytes) = 0
+
+#### RUN 5 RESULT: ####
+
+----- Benchmark=NatarajanMittalTreeNR   numElements=128   numThreads=128   testLength=10s -----
+Ops/sec = 86716525
+memory_usage (Bytes) = 0
+
+###### MEDIAN RESULT FOR ALL 5 RUNS: ######
+
+----- Benchmark=NatarajanMittalTreeNR   numElements=128   numThreads=128   testLength=10s -----
+Ops/sec = 86729265   delta = 0%   min = 86681583   max = 86765304
+memory_usage = 0   delta = 0%   min = 0   max = 0
+
+##### NatarajanMittalTreeNR #####  
+
+#### RUN 1 RESULT: ####
+
+----- Benchmark=NatarajanMittalTreeNR   numElements=128   numThreads=256   testLength=10s -----
+Ops/sec = 99274054
+memory_usage (Bytes) = 0
+
+#### RUN 2 RESULT: ####
+
+----- Benchmark=NatarajanMittalTreeNR   numElements=128   numThreads=256   testLength=10s -----
+Ops/sec = 99316426
+memory_usage (Bytes) = 0
+
+#### RUN 3 RESULT: ####
+
+----- Benchmark=NatarajanMittalTreeNR   numElements=128   numThreads=256   testLength=10s -----
+Ops/sec = 99252832
+memory_usage (Bytes) = 0
+
+#### RUN 4 RESULT: ####
+
+----- Benchmark=NatarajanMittalTreeNR   numElements=128   numThreads=256   testLength=10s -----
+Ops/sec = 99331649
+memory_usage (Bytes) = 0
+
+#### RUN 5 RESULT: ####
+
+----- Benchmark=NatarajanMittalTreeNR   numElements=128   numThreads=256   testLength=10s -----
+Ops/sec = 99355610
+memory_usage (Bytes) = 0
+
+###### MEDIAN RESULT FOR ALL 5 RUNS: ######
+
+----- Benchmark=NatarajanMittalTreeNR   numElements=128   numThreads=256   testLength=10s -----
+Ops/sec = 99316426   delta = 0%   min = 99252832   max = 99355610
+memory_usage = 0   delta = 0%   min = 0   max = 0
+
+##### NatarajanMittalTreeNR #####  
+
+#### RUN 1 RESULT: ####
+
+----- Benchmark=NatarajanMittalTreeNR   numElements=128   numThreads=384   testLength=10s -----
+Ops/sec = 99520134
+memory_usage (Bytes) = 0
+
+#### RUN 2 RESULT: ####
+
+----- Benchmark=NatarajanMittalTreeNR   numElements=128   numThreads=384   testLength=10s -----
+Ops/sec = 99547432
+memory_usage (Bytes) = 0
+
+#### RUN 3 RESULT: ####
+
+----- Benchmark=NatarajanMittalTreeNR   numElements=128   numThreads=384   testLength=10s -----
+Ops/sec = 99603508
+memory_usage (Bytes) = 0
+
+#### RUN 4 RESULT: ####
+
+----- Benchmark=NatarajanMittalTreeNR   numElements=128   numThreads=384   testLength=10s -----
+Ops/sec = 99589185
+memory_usage (Bytes) = 0
+
+#### RUN 5 RESULT: ####
+
+----- Benchmark=NatarajanMittalTreeNR   numElements=128   numThreads=384   testLength=10s -----
+Ops/sec = 99398869
+memory_usage (Bytes) = 0
+
+###### MEDIAN RESULT FOR ALL 5 RUNS: ######
+
+----- Benchmark=NatarajanMittalTreeNR   numElements=128   numThreads=384   testLength=10s -----
+Ops/sec = 99547432   delta = 0%   min = 99398869   max = 99603508
+memory_usage = 0   delta = 0%   min = 0   max = 0
+
+
+FINAL RESULTS (FOR CHARTS):
+
+Results in ops per second for numRuns=5,  length=10s 
+
+Number of elements: 128
+
+Threads, NatarajanMittalTreeNR
+1, 10162015, 
+16, 37067433, 
+32, 56947032, 
+64, 74447367, 
+128, 86729265, 
+256, 99316426, 
+384, 99547432, 
+

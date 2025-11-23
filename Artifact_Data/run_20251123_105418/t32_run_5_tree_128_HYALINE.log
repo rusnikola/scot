@@ -1,0 +1,26 @@
+##### NatarajanMittalTreeHYALINE #####  
+
+
+#### RUN 1 RESULT: ####
+
+----- Benchmark=NatarajanMittalTreeHYALINE   numElements=128   numThreads=32   testLength=10s -----
+Ops/sec = 45932831
+memory_usage (Bytes) = 0
+
+
+###### MEDIAN RESULT FOR ALL 1 RUNS: ######
+
+----- Benchmark=NatarajanMittalTreeHYALINE   numElements=128   numThreads=32   testLength=10s -----
+Ops/sec = 45932831   delta = 0%   min = 45932831   max = 45932831
+memory_usage = 0   delta = 0%   min = 0   max = 0
+
+
+FINAL RESULTS (FOR CHARTS):
+
+
+Results in ops per second for numRuns=1,  length=10s 
+
+Number of elements: 128
+
+Threads, NatarajanMittalTreeHYALINE, NatarajanMittalTreeHYALINE_Memory_Usage
+32, 45932831, 0, 

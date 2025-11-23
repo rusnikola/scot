@@ -24,8 +24,8 @@
  * SUCH DAMAGE.
  */
 
-#ifndef _TIM_HARRIS_LINKED_LIST_REC_HYALINE_H_
-#define _TIM_HARRIS_LINKED_LIST_REC_HYALINE_H_
+#ifndef _TIM_HARRIS_LINKED_LIST_LF_HYALINE_H_
+#define _TIM_HARRIS_LINKED_LIST_LF_HYALINE_H_
 
 #include <atomic>
 #include <thread>
@@ -36,7 +36,7 @@
 #include "Hyaline.hpp"
 
 template<typename T, size_t N = 1>
-class HarrisLinkedListRecHyaline {
+class HarrisLinkedListLFHyaline {
 
 private:
     struct Node : HyalineNode {
@@ -66,11 +66,11 @@ private:
     }
 
 public:
-    HarrisLinkedListRecHyaline(const int _maxThreads) : maxThreads{_maxThreads} {
+    HarrisLinkedListLFHyaline(const int _maxThreads) : maxThreads{_maxThreads} {
         head.store(hyaline.init_object(new Node(nullptr), 0)); // sentinel node
     }
 
-    ~HarrisLinkedListRecHyaline() { }
+    ~HarrisLinkedListLFHyaline() { }
 
     std::string className() { return "HarrisLinkedListHYALINE"; }
 
@@ -182,7 +182,7 @@ again:
                 prev_next = next; // next is unmarked
             } else {
                 if (prev->load() != prev_next) {
-                    curr = hyaline.protect(*prev, tid);
+local_recovery:     curr = hyaline.protect(*prev, tid);
                     if (checkPtrMarked(curr)) goto again;
                     // recover locally
                     // prev is already retrieved
@@ -196,7 +196,9 @@ again:
 
         // Some nodes in between
         if (prev_next != curr) {
-            if (!prev->compare_exchange_strong(prev_next, curr)) goto again;
+            if (!prev->compare_exchange_strong(prev_next, curr)) {
+                goto local_recovery;
+            }
             // Retire nodes
             do {
                 Node *tmp = unmarkPtr(prev_next->next.load(std::memory_order_relaxed));
@@ -212,4 +214,4 @@ again:
     }
 };
 
-#endif /* _TIM_HARRIS_LINKED_LIST_REC_HYALINE_H_ */
+#endif /* _TIM_HARRIS_LINKED_LIST_LF_HYALINE_H_ */

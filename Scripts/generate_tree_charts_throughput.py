@@ -5,17 +5,18 @@ import matplotlib.pyplot as plt
 import numpy as np
 import cairosvg
 
-# CONFIG
+
 BASE_DIR = '../Data/tree_output_results'
 CHART_DIR = '../Data/tree_charts'
-HATCHES = ['-', '\\', '/', '*']
-COLORS = ['gold', 'g', 'm', 'c', 'blue', 'red', 'green', 'purple']
+HATCHES = ['-', '\\', '/', '*', '+', 'x', 'o']
+COLORS = ['gold', 'g', 'm', 'c', 'blue', 'red', 'purple']
 SAVE_SUFFIX = '_throughput_plot'
 
 column_name_replacements = {
     "NatarajanMittalTreeNR": "NMTree-NR",
     "NatarajanMittalTreeEBR": "NMTree-EBR",
-    "NatarajanMittalTreeHP": "NMTree-HP",
+    "NatarajanMittalTreeHPO": "NMTree-HP",
+    "NatarajanMittalTreeHP": "NMTree-HPopt",
     "NatarajanMittalTreeIBR": "NMTree-IBR",
     "NatarajanMittalTreeHE": "NMTree-HE",
     "NatarajanMittalTreeHYALINE": "NMTree-HLN"
@@ -23,7 +24,8 @@ column_name_replacements = {
 
 def benchmark_sort_key(label):
     suffix = label.split('-')[-1]
-    return ['NR', 'EBR', 'HP', 'IBR', 'HE', 'HLN'].index(suffix)
+
+    return ['NR', 'EBR', 'HP', 'HPopt', 'IBR', 'HE', 'HLN'].index(suffix)
 
 def extract_table(filepath):
     with open(filepath, 'r') as f:
@@ -57,7 +59,7 @@ def extract_table(filepath):
     df.iloc[:, 1] = df.iloc[:, 1].astype(int)
     return df
 
-# MAIN
+
 for rw_dir in os.listdir(BASE_DIR):
     rw_path = os.path.join(BASE_DIR, rw_dir)
     if not os.path.isdir(rw_path): continue
@@ -86,13 +88,15 @@ for rw_dir in os.listdir(BASE_DIR):
 
         if not data_map: continue
 
-        fig, ax = plt.subplots(figsize=(16, 11))
+        fig, ax = plt.subplots(figsize=(18, 8))
 
         benchmarks = sorted(data_map.keys(), key=benchmark_sort_key)
         num_benchmarks = len(benchmarks)
         bar_width = 0.15
         group_spacing = 0.3
-        index = np.arange(len(thread_vals)) * (num_benchmarks * bar_width + group_spacing)
+        total_group_width = num_benchmarks * bar_width + group_spacing
+        index = np.arange(len(thread_vals)) * total_group_width
+
 
         for i, benchmark in enumerate(benchmarks):
             values = data_map[benchmark]
@@ -103,17 +107,35 @@ for rw_dir in os.listdir(BASE_DIR):
                    hatch=HATCHES[i % len(HATCHES)],
                    edgecolor='black')
 
+
+
+        offsets = [i * bar_width for i in range(num_benchmarks)]
+        PAD = 0.3 * bar_width
+
+        left_edge  = (index[0]  + min(offsets)) - (bar_width / 2) - PAD
+        right_edge = (index[-1] + max(offsets)) + (bar_width / 2) + PAD
+        ax.set_xlim(left_edge, right_edge)
+
+
+        tick_centers = index + (num_benchmarks * bar_width) / 2 - bar_width / 2
+        ax.set_xticks(tick_centers)
+        ax.set_xticklabels(thread_vals, fontsize=40, fontweight='bold')
+
         ax.set_xlabel('Threads', fontsize=36, fontweight='bold', labelpad=5)
         ax.set_ylabel('Throughput, ops/sec', fontsize=36, fontweight='bold', labelpad=25)
-        ax.set_xticks(index + (num_benchmarks * bar_width) / 2 - bar_width / 2)
-        ax.set_xticklabels(thread_vals, fontsize=40, fontweight='bold')
         ax.ticklabel_format(axis='y', style='sci', scilimits=(0, 0), useMathText=True)
         ax.yaxis.offsetText.set_fontsize(40)
         ax.yaxis.offsetText.set_fontweight('bold')
-
         for tick in ax.get_yticklabels():
             tick.set_fontsize(40)
             tick.set_fontweight('bold')
+
+        legend = ax.legend(
+            ncol=2, frameon=False, fancybox=False, edgecolor='black', columnspacing=0.3,  borderaxespad=0.0, labelspacing=0.2, borderpad=0.2,
+            prop={'size': 30, 'weight': 'bold'}, handlelength=1.6, handletextpad=0.1
+        )
+        legend.get_frame().set_linestyle('--')
+        legend.get_frame().set_linewidth(2)
 
         output_dir = os.path.join(CHART_DIR, rw_dir, kr_dir)
         os.makedirs(output_dir, exist_ok=True)

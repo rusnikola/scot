@@ -38,23 +38,27 @@
 #include <algorithm>
 #include <random>
 #include "HarrisLinkedListNR.hpp"
-#include "HarrisLinkedListHP.hpp"
-#include "HarrisLinkedListHE.hpp"
 #include "HarrisLinkedListEBR.hpp"
-#include "HarrisLinkedListIBR.hpp"
-#include "HarrisLinkedListHyaline.hpp"
-#include "HarrisLinkedListRecHP.hpp"
-#include "HarrisLinkedListRecHE.hpp"
-#include "HarrisLinkedListRecIBR.hpp"
-#include "HarrisLinkedListRecHyaline.hpp"
+#include "HarrisLinkedListLFHP.hpp"
+#include "HarrisLinkedListLFHPO.hpp"
+#include "HarrisLinkedListLFHE.hpp"
+#include "HarrisLinkedListLFIBR.hpp"
+#include "HarrisLinkedListLFHyaline.hpp"
+#include "HarrisLinkedListWFHP.hpp"
+#include "HarrisLinkedListWFHPO.hpp"
+#include "HarrisLinkedListWFHE.hpp"
+#include "HarrisLinkedListWFIBR.hpp"
+#include "HarrisLinkedListWFHyaline.hpp"
 #include "HarrisMichaelLinkedListNR.hpp"
 #include "HarrisMichaelLinkedListHP.hpp"
+#include "HarrisMichaelLinkedListHPO.hpp"
 #include "HarrisMichaelLinkedListHE.hpp"
 #include "HarrisMichaelLinkedListEBR.hpp"
 #include "HarrisMichaelLinkedListIBR.hpp"
 #include "HarrisMichaelLinkedListHyaline.hpp"
 #include "NatarajanMittalTreeNR.hpp"
 #include "NatarajanMittalTreeHP.hpp"
+#include "NatarajanMittalTreeHPO.hpp"
 #include "NatarajanMittalTreeHE.hpp"
 #include "NatarajanMittalTreeEBR.hpp"
 #include "NatarajanMittalTreeIBR.hpp"
@@ -64,8 +68,8 @@ using namespace std;
 using namespace chrono;
 
 enum DsType {
-    DS_TYPE_LISTNOREC = 0,
-    DS_TYPE_LIST = 1,
+    DS_TYPE_LISTLF = 0,
+    DS_TYPE_LISTWF = 1,
     DS_TYPE_TREE = 2
 };
 
@@ -134,15 +138,18 @@ public:
         L* list = nullptr;
         string className;
         bool isNR = (reclamation == "NR");
-        
-        UserData* udarray[numElements]; 
-        
+        const size_t prefill_range_max = 100000;
+
+        std::unique_ptr<UserData[]> udpool(new UserData[numElements]);
+        std::vector<UserData*> udarray(numElements);
+
         for (size_t i = 0; i < numElements; ++i) {
-            udarray[i] = new UserData(i);
+            udpool[i] = UserData((long long)i);
+            udarray[i] = &udpool[i];
         }
-        
+
         srand((unsigned) time(NULL));
-        
+
         auto rw_lambda = [this,&quit,&startFlag,&list,&udarray,&numElements,&dsType,&readPercent,&insertPercent](long long *ops, const int tid) {
             long long numOps = 0;
             uint64_t r = rand();
@@ -168,12 +175,14 @@ public:
 
         for (int irun = 0; irun < numRuns; irun++) {
             list = new L(numThreads);
-            
-             std::vector<long long> keys;
+
+            std::vector<long long> keys;
             uint64_t r = 1;
             std::mt19937_64 gen(1);
 
-            size_t half = numElements / 2;
+            // avoid excessive number of elements in the 'keys' vector
+            size_t half = (numElements / 2) > prefill_range_max ? prefill_range_max : numElements / 2;
+            keys.reserve(half);
             for (size_t i = 0; i < half; ++i) {
                 r = gen();
                 keys.push_back(r%numElements);
@@ -206,8 +215,6 @@ public:
                 
             delete list;
         }
-
-        for (int i = 0; i < numElements; i++) delete udarray[i];
 
         vector<long long> agg(numRuns);
         for (int irun = 0; irun < numRuns; irun++) {
@@ -266,20 +273,22 @@ public:
         } else {
             threadList = { 1, 16, 32, 64, 128, 256, 384 };
         }
-        //threadList = { 2, 4, 6, 8 }; //for laptop
+        // threadList = { 1, 4, 8, 12, 16, 24, 32 }; // for a laptop
         const int numRuns = numberOfRuns;
         const seconds testLength = seconds(testLengthSeconds);
         vector<int> elemsList;
         long long ops[8][threadList.size()];
         long long mem[8][threadList.size()];
 
-        if (dsType == DS_TYPE_LIST || dsType == DS_TYPE_LISTNOREC) {
+        if (dsType == DS_TYPE_LISTWF || dsType == DS_TYPE_LISTLF) {
             const int MHLNONE = 0;
             const int HLNONE = 1;
             const int MHLEBR = 0;
             const int HLEBR = 1;
             const int MHLHP = 0;
             const int HLHP = 1;
+            const int MHLHPO = 0;
+            const int HLHPO = 1;
             const int MHLHE = 0;
             const int HLHE = 1;
             const int MHLIBR = 0;
@@ -308,28 +317,35 @@ public:
                             auto result5 = bench.benchmark<HarrisMichaelLinkedListHP<UserData, 1>, 1>(testLength, numRuns, numElements, dsType, readPercent, insertPercent, deletePercent, reclamation);
                             ops[MHLHP][ithread] = result5.first;
                             mem[MHLHP][ithread] = result5.second;
-                            auto result6 = (dsType == DS_TYPE_LISTNOREC) ? bench.benchmark<HarrisLinkedListHP<UserData, 1>, 1>(testLength, numRuns, numElements, dsType, readPercent, insertPercent, deletePercent, reclamation) : bench.benchmark<HarrisLinkedListRecHP<UserData, 1>, 1>(testLength, numRuns, numElements, dsType, readPercent, insertPercent, deletePercent, reclamation);
+                            auto result6 = (dsType == DS_TYPE_LISTLF) ? bench.benchmark<HarrisLinkedListLFHP<UserData, 1>, 1>(testLength, numRuns, numElements, dsType, readPercent, insertPercent, deletePercent, reclamation) : bench.benchmark<HarrisLinkedListWFHP<UserData, 1>, 1>(testLength, numRuns, numElements, dsType, readPercent, insertPercent, deletePercent, reclamation);
                             ops[HLHP][ithread] = result6.first;
                             mem[HLHP][ithread] = result6.second;
+                        } else if(reclamation == "HPO"){
+                            auto result13 = bench.benchmark<HarrisMichaelLinkedListHPO<UserData, 1>, 1>(testLength, numRuns, numElements, dsType, readPercent, insertPercent, deletePercent, reclamation);
+                            ops[MHLHPO][ithread] = result13.first;
+                            mem[MHLHPO][ithread] = result13.second;
+                            auto result14 = (dsType == DS_TYPE_LISTLF) ? bench.benchmark<HarrisLinkedListLFHPO<UserData, 1>, 1>(testLength, numRuns, numElements, dsType, readPercent, insertPercent, deletePercent, reclamation) : bench.benchmark<HarrisLinkedListWFHPO<UserData, 1>, 1>(testLength, numRuns, numElements, dsType, readPercent, insertPercent, deletePercent, reclamation);
+                            ops[HLHPO][ithread] = result14.first;
+                            mem[HLHPO][ithread] = result14.second;
                         } else if(reclamation == "IBR"){
                             auto result7 = bench.benchmark<HarrisMichaelLinkedListIBR<UserData, 1>, 1>(testLength, numRuns, numElements, dsType, readPercent, insertPercent, deletePercent, reclamation);
                             ops[MHLIBR][ithread] = result7.first;
                             mem[MHLIBR][ithread] = result7.second;
-                            auto result8 = (dsType == DS_TYPE_LISTNOREC) ? bench.benchmark<HarrisLinkedListIBR<UserData, 1>, 1>(testLength, numRuns, numElements, dsType, readPercent, insertPercent, deletePercent, reclamation) : bench.benchmark<HarrisLinkedListRecIBR<UserData, 1>, 1>(testLength, numRuns, numElements, dsType, readPercent, insertPercent, deletePercent, reclamation);
+                            auto result8 = (dsType == DS_TYPE_LISTLF) ? bench.benchmark<HarrisLinkedListLFIBR<UserData, 1>, 1>(testLength, numRuns, numElements, dsType, readPercent, insertPercent, deletePercent, reclamation) : bench.benchmark<HarrisLinkedListWFIBR<UserData, 1>, 1>(testLength, numRuns, numElements, dsType, readPercent, insertPercent, deletePercent, reclamation);
                             ops[HLIBR][ithread] = result8.first;
                             mem[HLIBR][ithread] = result8.second;
                         } else if(reclamation == "HE"){
                             auto result9 = bench.benchmark<HarrisMichaelLinkedListHE<UserData, 1>, 1>(testLength, numRuns, numElements, dsType, readPercent, insertPercent, deletePercent, reclamation);
                             ops[MHLHE][ithread] = result9.first;
                             mem[MHLHE][ithread] = result9.second;
-                            auto result10 = (dsType == DS_TYPE_LISTNOREC) ? bench.benchmark<HarrisLinkedListHE<UserData, 1>, 1>(testLength, numRuns, numElements, dsType, readPercent, insertPercent, deletePercent, reclamation) : bench.benchmark<HarrisLinkedListRecHE<UserData, 1>, 1>(testLength, numRuns, numElements, dsType, readPercent, insertPercent, deletePercent, reclamation);
+                            auto result10 = (dsType == DS_TYPE_LISTLF) ? bench.benchmark<HarrisLinkedListLFHE<UserData, 1>, 1>(testLength, numRuns, numElements, dsType, readPercent, insertPercent, deletePercent, reclamation) : bench.benchmark<HarrisLinkedListWFHE<UserData, 1>, 1>(testLength, numRuns, numElements, dsType, readPercent, insertPercent, deletePercent, reclamation);
                             ops[HLHE][ithread] = result10.first;
                             mem[HLHE][ithread] = result10.second;
                         } else if(reclamation == "HYALINE"){
                             auto result11 = bench.benchmark<HarrisMichaelLinkedListHyaline<UserData, 1>, 1>(testLength, numRuns, numElements, dsType, readPercent, insertPercent, deletePercent, reclamation);
                             ops[MHLHYALINE][ithread] = result11.first;
                             mem[MHLHYALINE][ithread] = result11.second;
-                            auto result12 = (dsType == DS_TYPE_LISTNOREC) ? bench.benchmark<HarrisLinkedListHyaline<UserData, 1>, 1>(testLength, numRuns, numElements, dsType, readPercent, insertPercent, deletePercent, reclamation) : bench.benchmark<HarrisLinkedListRecHyaline<UserData, 1>, 1>(testLength, numRuns, numElements, dsType, readPercent, insertPercent, deletePercent, reclamation);
+                            auto result12 = (dsType == DS_TYPE_LISTLF) ? bench.benchmark<HarrisLinkedListLFHyaline<UserData, 1>, 1>(testLength, numRuns, numElements, dsType, readPercent, insertPercent, deletePercent, reclamation) : bench.benchmark<HarrisLinkedListWFHyaline<UserData, 1>, 1>(testLength, numRuns, numElements, dsType, readPercent, insertPercent, deletePercent, reclamation);
                             ops[HLHYALINE][ithread] = result12.first;
                             mem[HLHYALINE][ithread] = result12.second;
                         }
@@ -338,6 +354,7 @@ public:
             const int NTNONE = 0;
             const int NTEBR = 0;
             const int NTHP = 0;
+            const int NTHPO = 0;
             const int NTHE = 0;
             const int NTIBR = 0;
             const int NTHYALINE = 0;
@@ -358,6 +375,10 @@ public:
                     auto result3 = bench.benchmark<NatarajanMittalTreeHP<UserData, 1>, 1>(testLength, numRuns, numElements, dsType, readPercent, insertPercent, deletePercent, reclamation);
                     ops[NTHP][ithread] = result3.first;
                     mem[NTHP][ithread] = result3.second;
+                } else if(reclamation == "HPO"){
+                    auto result7 = bench.benchmark<NatarajanMittalTreeHPO<UserData, 1>, 1>(testLength, numRuns, numElements, dsType, readPercent, insertPercent, deletePercent, reclamation);
+                    ops[NTHPO][ithread] = result7.first;
+                    mem[NTHPO][ithread] = result7.second;
                 } else if(reclamation == "IBR"){
                     auto result4 = bench.benchmark<NatarajanMittalTreeIBR<UserData, 1>, 1>(testLength, numRuns, numElements, dsType, readPercent, insertPercent, deletePercent, reclamation);
                     ops[NTIBR][ithread] = result4.first;
@@ -378,7 +399,7 @@ public:
         std::cout << "\nResults in ops per second for numRuns=" << numRuns << ",  length=" << testLength.count() << "s \n";
         std::cout << "\nNumber of elements: " << numElements << "\n\n";
         int classSize;
-        if (dsType == DS_TYPE_LIST || dsType == DS_TYPE_LISTNOREC) {
+        if (dsType == DS_TYPE_LISTWF || dsType == DS_TYPE_LISTLF) {
             classSize = 2;
             if (reclamation == "NR") {
                 cout << "Threads, HarrisMichaelLinkedListNR, HarrisLinkedListNR\n";
@@ -386,6 +407,8 @@ public:
                 cout << "Threads, HarrisMichaelLinkedListEBR, HarrisLinkedListEBR, HarrisMichaelLinkedListEBR_Memory_Usage, HarrisLinkedListEBR_Memory_Usage\n";
             } else if(reclamation == "HP"){
                 cout << "Threads, HarrisMichaelLinkedListHP, HarrisLinkedListHP, HarrisMichaelLinkedListHP_Memory_Usage, HarrisLinkedListHP_Memory_Usage\n";
+            } else if(reclamation == "HPO"){
+                cout << "Threads, HarrisMichaelLinkedListHPO, HarrisLinkedListHPO, HarrisMichaelLinkedListHPO_Memory_Usage, HarrisLinkedListHPO_Memory_Usage\n";
             } else if(reclamation == "IBR"){
                 cout << "Threads, HarrisMichaelLinkedListIBR, HarrisLinkedListIBR, HarrisMichaelLinkedListIBR_Memory_Usage, HarrisLinkedListIBR_Memory_Usage\n";
             } else if(reclamation == "HE"){
@@ -401,6 +424,8 @@ public:
                 cout << "Threads, NatarajanMittalTreeEBR, NatarajanMittalTreeEBR_Memory_Usage\n";
             } else if(reclamation == "HP"){
                 cout << "Threads, NatarajanMittalTreeHP, NatarajanMittalTreeHP_Memory_Usage\n";
+            } else if(reclamation == "HPO"){
+                cout << "Threads, NatarajanMittalTreeHPO, NatarajanMittalTreeHPO_Memory_Usage\n";
             } else if(reclamation == "IBR"){
                 cout << "Threads, NatarajanMittalTreeIBR, NatarajanMittalTreeIBR_Memory_Usage\n";
             } else if(reclamation == "HE"){

@@ -24,8 +24,8 @@
  * SUCH DAMAGE.
  */
 
-#ifndef _TIM_HARRIS_LINKED_LIST_REC_HP_H_
-#define _TIM_HARRIS_LINKED_LIST_REC_HP_H_
+#ifndef _TIM_HARRIS_LINKED_LIST_LF_HP_H_
+#define _TIM_HARRIS_LINKED_LIST_LF_HP_H_
 
 #include <atomic>
 #include <thread>
@@ -36,7 +36,7 @@
 #include "HazardPointers.hpp"
 
 template<typename T, size_t N = 1>
-class HarrisLinkedListRecHP {
+class HarrisLinkedListLFHP {
 
 private:
     struct Node {
@@ -70,11 +70,11 @@ private:
     }
 
 public:
-    HarrisLinkedListRecHP(const int maxThreads) : maxThreads{maxThreads} {
+    HarrisLinkedListLFHP(const int maxThreads) : maxThreads{maxThreads} {
         head.store(new Node(nullptr)); // sentinel node
     }
 
-    ~HarrisLinkedListRecHP() { }
+    ~HarrisLinkedListLFHP() { }
 
     std::string className() { return "HarrisLinkedListHP"; }
 
@@ -208,7 +208,7 @@ again:
                 if ((tmp = prev->load()) != prev_next) {
                     // An optimized version of protect()
                     prev_next = tmp;
-                    do {
+local_recovery:     do {
                         if (checkPtrMarked(prev_next)) goto again;
                         // Use kHp2 here instead of kHp1 to allow
                         // both prev_next and curr protection and ability
@@ -224,7 +224,9 @@ again:
 cleanup:
         // Some nodes in between
         if (prev_next != nullptr && prev_next != curr) {
-            if (!prev->compare_exchange_strong(prev_next, curr)) goto again;
+            if (!prev->compare_exchange_strong(prev_next, curr)) {
+                goto local_recovery;
+            }
             // Retire nodes
             do {
                 Node *tmp = unmarkPtr(prev_next->next.load(std::memory_order_relaxed));
@@ -241,4 +243,4 @@ done:
     }
 };
 
-#endif /* _TIM_HARRIS_LINKED_LIST_REC_HP_H_ */
+#endif /* _TIM_HARRIS_LINKED_LIST_LF_HP_H_ */

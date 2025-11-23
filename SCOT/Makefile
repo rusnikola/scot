@@ -1,22 +1,26 @@
 MYDEPS = \
 	HarrisLinkedListNR.hpp \
-	HarrisLinkedListHP.hpp \
-	HarrisLinkedListHE.hpp \
 	HarrisLinkedListEBR.hpp \
-	HarrisLinkedListIBR.hpp \
-	HarrisLinkedListHyaline.hpp \
-	HarrisLinkedListRecHP.hpp \
-	HarrisLinkedListRecHE.hpp \
-	HarrisLinkedListRecIBR.hpp \
-	HarrisLinkedListRecHyaline.hpp \
+	HarrisLinkedListLFHP.hpp \
+	HarrisLinkedListLFHPO.hpp \
+	HarrisLinkedListLFHE.hpp \
+	HarrisLinkedListLFIBR.hpp \
+	HarrisLinkedListLFHyaline.hpp \
+	HarrisLinkedListWFHP.hpp \
+	HarrisLinkedListWFHPO.hpp \
+	HarrisLinkedListWFHE.hpp \
+	HarrisLinkedListWFIBR.hpp \
+	HarrisLinkedListWFHyaline.hpp \
 	HarrisMichaelLinkedListNR.hpp \
 	HarrisMichaelLinkedListHP.hpp \
+	HarrisMichaelLinkedListHPO.hpp \
 	HarrisMichaelLinkedListHE.hpp \
 	HarrisMichaelLinkedListEBR.hpp \
 	HarrisMichaelLinkedListIBR.hpp \
 	HarrisMichaelLinkedListHyaline.hpp \
 	NatarajanMittalTreeNR.hpp \
 	NatarajanMittalTreeHP.hpp \
+	NatarajanMittalTreeHPO.hpp \
 	NatarajanMittalTreeHE.hpp \
 	NatarajanMittalTreeEBR.hpp \
 	NatarajanMittalTreeIBR.hpp \

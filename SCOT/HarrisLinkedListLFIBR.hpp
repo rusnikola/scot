@@ -24,8 +24,8 @@
  * SUCH DAMAGE.
  */
 
-#ifndef _TIM_HARRIS_LINKED_LIST_REC_IBR_H_
-#define _TIM_HARRIS_LINKED_LIST_REC_IBR_H_
+#ifndef _TIM_HARRIS_LINKED_LIST_LF_IBR_H_
+#define _TIM_HARRIS_LINKED_LIST_LF_IBR_H_
 
 #include <atomic>
 #include <thread>
@@ -36,7 +36,7 @@
 #include "IBR.hpp"
 
 template<typename T, size_t N = 1>
-class HarrisLinkedListRecIBR {
+class HarrisLinkedListLFIBR {
 
 private:
     struct Node : IBRNode {
@@ -66,11 +66,11 @@ private:
     }
 
 public:
-    HarrisLinkedListRecIBR(const int _maxThreads) : maxThreads{_maxThreads} {
+    HarrisLinkedListLFIBR(const int _maxThreads) : maxThreads{_maxThreads} {
         head.store(ibr.init_object(new Node(nullptr), 0)); // sentinel node
     }
 
-    ~HarrisLinkedListRecIBR() { }
+    ~HarrisLinkedListLFIBR() { }
 
     std::string className() { return "HarrisLinkedListIBR"; }
 
@@ -182,7 +182,7 @@ again:
                 prev_next = next; // next is unmarked
             } else {
                 if (prev->load() != prev_next) {
-                    curr = ibr.protect(*prev, tid);
+local_recovery:     curr = ibr.protect(*prev, tid);
                     if (checkPtrMarked(curr)) goto again;
                     // recover locally
                     // prev is already retrieved
@@ -196,7 +196,9 @@ again:
 
         // Some nodes in between
         if (prev_next != curr) {
-            if (!prev->compare_exchange_strong(prev_next, curr)) goto again;
+            if (!prev->compare_exchange_strong(prev_next, curr)) {
+                goto local_recovery;
+            }
             // Retire nodes
             do {
                 Node *tmp = unmarkPtr(prev_next->next.load(std::memory_order_relaxed));
@@ -212,4 +214,4 @@ again:
     }
 };
 
-#endif /* _TIM_HARRIS_LINKED_LIST_REC_IBR_H_ */
+#endif /* _TIM_HARRIS_LINKED_LIST_LF_IBR_H_ */
