@@ -63,6 +63,7 @@
 #include "NatarajanMittalTreeEBR.hpp"
 #include "NatarajanMittalTreeIBR.hpp"
 #include "NatarajanMittalTreeHyaline.hpp"
+#include <unistd.h>
 
 using namespace std;
 using namespace chrono;
@@ -138,7 +139,9 @@ public:
         L* list = nullptr;
         string className;
         bool isNR = (reclamation == "NR");
-        const size_t prefill_range_max = 100000;
+        // For performance, use several threads to prefill large key ranges;
+        // otherwise, it takes a lot of time for each data point
+        const size_t sequential_prefill_threshold = 100000;
 
         std::unique_ptr<UserData[]> udpool(new UserData[numElements]);
         std::vector<UserData*> udarray(numElements);
@@ -174,22 +177,46 @@ public:
         };
 
         for (int irun = 0; irun < numRuns; irun++) {
-            list = new L(numThreads);
+            const int prefillThreadCount = std::min((int) sysconf(_SC_NPROCESSORS_ONLN), 384);  // Max # threads to use for prefilling (cap at 384 threads)
+            const int maxThreadsNeeded = (numElements > sequential_prefill_threshold) ? std::max(numThreads, prefillThreadCount) : numThreads;
+            list = new L(maxThreadsNeeded);
 
             std::vector<long long> keys;
             uint64_t r = 1;
             std::mt19937_64 gen(1);
 
-            // avoid excessive number of elements in the 'keys' vector
-            size_t half = (numElements / 2) > prefill_range_max ? prefill_range_max : numElements / 2;
+            size_t half = numElements / 2;
             keys.reserve(half);
             for (size_t i = 0; i < half; ++i) {
                 r = gen();
                 keys.push_back(r%numElements);
             }
 
-            for (auto& key : keys) {
-                list->insert(new UserData(key), 0);
+            // Use sequential prefill for small datasets, parallel for large datasets
+            if (numElements <= sequential_prefill_threshold || prefillThreadCount < 2) {
+                // Sequential prefill with thread 0
+                for (auto& key : keys) {
+                    list->insert(new UserData(key), 0);
+                }
+            } else {
+                // Parallel prefill using all threads
+                auto prefill_lambda = [&list, &keys, half, prefillThreadCount](const int tid) {
+                    size_t chunk_size = (half + prefillThreadCount - 1) / prefillThreadCount;
+                    size_t start_idx = tid * chunk_size;
+                    size_t end_idx = std::min(start_idx + chunk_size, half);
+
+                    for (size_t i = start_idx; i < end_idx; ++i) {
+                        list->insert(new UserData(keys[i]), tid);
+                    }
+                };
+
+                thread prefillThreads[prefillThreadCount];
+                for (int tid = 0; tid < prefillThreadCount; tid++) {
+                    prefillThreads[tid] = thread(prefill_lambda, tid);
+                }
+                for (int tid = 0; tid < prefillThreadCount; tid++) {
+                    prefillThreads[tid].join();
+                }
             }
             
             if (irun == 0) {
@@ -206,13 +233,16 @@ public:
             quit.store(false);
             startFlag.store(false);
             for (int tid = 0; tid < numThreads; tid++) mem[tid][irun] = list->calculate_space(tid);
-                
-            if(!isNR){
-                for (int i = 0; i < numElements; i++) {
-                    list->remove(udarray[i], 0);
+
+            if (!isNR) {
+                // For large key ranges, we are running separately for
+                // each individual data point anyway
+                if (numElements <= sequential_prefill_threshold){
+                    for (int i = 0; i < numElements; i++) {
+                        list->remove(udarray[i], 0);
+                    }
                 }
             }
-                
             delete list;
         }
 
